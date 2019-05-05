@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {actionAddData} from '../redux/actions/noteAction'
-class NoteFormNew extends Component {
+import {actionEditData} from '../../redux/actions/noteAction'
+class NoteFormEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            i: '',
+            ItemChoise: '',
             titleNote: '',
             contentNote: ''
         }
@@ -17,12 +17,6 @@ class NoteFormNew extends Component {
             [name]: value
         });
     };
-    addData = (title, content) => {
-            this.props.addDataFirebase({
-                titleNote: title,
-                contentNote: content
-            });
-    }
     //WARNING! To be deprecated in React v17. Use componentDidMount instead.
     componentWillMount() {
         if (this.props.editItem) {
@@ -36,16 +30,16 @@ class NoteFormNew extends Component {
     render() {
         return (
             <div className="col-4">
-                <h4>TẠO MỚI NOTE</h4>
-                <form key={this.props.i}>
+                <h4>SỬA NỘI DUNG NOTE</h4>
+                <form key={this.props.ItemChoise}>
                     <div className="form-group">
-                        <label htmlFor="titleNote">TẠO MỚI NOTE</label>
+                        <label htmlFor="titleNote">SỬA NỘI DUNG NOTE</label>
                         <input defaultValue={this.props.editItem.titleNote} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="titleNote" id="titleNote" aria-describedby="helpIdTitle" placeholder="Tiêu đề note" />
                         <small id="helpIdTitle" className="form-text text-muted">Điền tiêu đề vào đây</small>
                         <textarea defaultValue={this.props.editItem.contentNote} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="contentNote" id="contentNote" aria-describedby="helpIdTitle" placeholder="Nội dung note" />
                         <small id="helpIdContent" className="form-text text-muted">Điền nội dung vào đây</small>
                     </div>
-                    <button type="reset" onClick={() => { this.props.actionAddData({titleNote:this.state.titleNote, contentNote:this.state.contentNote})}} className="btn btn-primary btn-block">Lưu</button>
+                    <button type="reset" onClick={() => this.props.actionEditData({titleNote:this.state.titleNote, contentNote:this.state.contentNote}) } className="btn btn-primary btn-block">Lưu</button>
                 </form>
             </div>
         );
@@ -56,18 +50,16 @@ const mapStateToProps = (state) => {
     return {
         editItem: state.note.editItem,
         ItemChoise: state.note.ItemChoise,
-        titleForm:state.note.titleForm,
-        isEdit:state.note.isEdit,
-        isNew:state.note.isNew
+        titleForm: state.note.titleForm
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        actionAddData: (newItem) => {
-            dispatch(actionAddData(newItem))
+        actionEditData: (editItem) => {
+            dispatch(actionEditData(editItem))
         }
     }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoteFormNew);
+export default connect(mapStateToProps, mapDispatchToProps)(NoteFormEdit);

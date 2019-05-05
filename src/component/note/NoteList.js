@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { firebaseConnection } from '../firebase';
+import {firebaseConnection} from '../../firebase';
 import NoteItem from './NoteItem';
 import { connect } from 'react-redux';
-import {actionToggleNewTrue} from '../redux/actions/noteAction'
+import {actionToggleNewTrue} from '../../redux/actions/noteAction'
 class NoteList extends Component {
     constructor(props) {
         super(props)

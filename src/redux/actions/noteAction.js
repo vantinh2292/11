@@ -1,4 +1,4 @@
-import { firebaseConnection } from "../../firebase";
+import {firebaseConnection} from "../../firebase";
 var dataSnapshot = firebaseConnection.database().ref('Table1/Note');
 export const actionAddData = (newItem) => {
     return (dispatch,getState) => {

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import SigneIn_SignOut_Link from './SigneIn_SignOut_Link'
+import LogOut_Link from './LogOut_Link'
 class Nav extends Component {
     render() {
+        const {UID}=this.props;
         return (
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark mb-4" style={{ backgroundColor: 'red' }}>
@@ -15,8 +18,8 @@ class Nav extends Component {
                             <li className="nav-item">
                                 <a className="nav-link" href="#ddddd">Link</a>
                             </li>
-                            
                         </ul>
+                        {!UID?<SigneIn_SignOut_Link/>:<LogOut_Link/>}
                     </div>
                 </nav>
 
@@ -24,5 +27,8 @@ class Nav extends Component {
         );
     }
 }
+const mapStateToProps = (state, ownProps) => ({
+    UID:state.firebase.auth.uid
+})
 
-export default Nav;
+export default connect(mapStateToProps)(Nav);

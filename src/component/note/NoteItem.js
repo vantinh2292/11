@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import {actionToggleEdit,actionToggleNew,actionDeleteData} from '../redux/actions/noteAction'
+import {actionToggleEdit,actionToggleNew,actionDeleteData} from '../../redux/actions/noteAction'
 class NoteItem extends Component {
 render() {
     const { i, titleNote, contentNote,createAt,actionToggleEdit,actionToggleNew,actionDeleteData } = this.props;

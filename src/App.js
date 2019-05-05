@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './App.css';
-import store from './redux/store';
-import { Provider } from 'react-redux'
-import MainComponent from './component/MainComponent';
+import Nav from './component/layout/Nav';
+import Dashboard from './component/dashboard/Dashboard'
+import SignIn from './component/auth/SignIn'
+import SignUp from './component/auth/SignUp'
+export default class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Nav />
+          <Switch>
+            <Route exact path='/' component={Dashboard} />
+            <Route path='/signin' component={SignIn} />
+            <Route path='/signup' component={SignUp} />
+          </Switch>
+        </div>
+      </BrowserRouter>
 
-
-function App() {
-  return (
-    <Provider store={store}>
-      <MainComponent />
-    </Provider>
-
-  );
+    );
+  }
 }
-export default App;
+
