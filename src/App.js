@@ -6,6 +6,7 @@ import Dashboard from './component/dashboard/Dashboard'
 import SignIn from './component/auth/SignIn'
 import SignUp from './component/auth/SignUp'
 import UpdateProfile from './component/auth/UpdateProfile';
+import ConcreteMixing from './component/layout/ConcreteMixing';
 export default class App extends Component {
   render() {
     return (
@@ -17,6 +18,7 @@ export default class App extends Component {
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
             <Route path='/profile' component={UpdateProfile} />
+            <Route path='/concrete' component={ConcreteMixing} />
           </Switch>
         </div>
       </BrowserRouter>
