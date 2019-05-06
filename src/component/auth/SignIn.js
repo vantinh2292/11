@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { signIn } from '../../redux/actions/authAction'
 import { Redirect } from 'react-router-dom';
+// import '../css/SignIn.css'
 class SignIn extends Component {
   state = {
     email: "",
@@ -19,38 +20,45 @@ class SignIn extends Component {
   };
 
   render() {
-    // const { authError } = this.props.auth;
-    // const { uid } = this.props;
-    // if (uid) {
-    //   return <Redirect to='/' />
-    // }
+    const { authError } = this.props.auth;
+    const { uid } = this.props;
+    if (uid) {
+      return <Redirect to='/' />
+    }
     return (
-      <div className="container">
-        <form onSubmit={this.handleSubmit} className="while">
-          <h5 className="grey-text text-darken-3">Sign In</h5>
-          <div className="input-field">
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" onChange={this.handleChange} />
+      <div id="login">
+        <h3 className="text-center text-white pt-5">Login form</h3>
+        <div className="container">
+          <div id="login-row" className="row justify-content-center align-items-center">
+            <div id="login-column" className="col-md-6">
+              <div id="login-box" className="col-md-12">
+                <form id="login-form" className="form" onSubmit={this.handleSubmit}>
+                  <h3 className="text-center text-info">Login</h3>
+                  <div className="form-group">
+                    <label htmlFor="email" className="text-info">Email:</label><br />
+                    <input type="text" onChange={this.handleChange} placeholder="Your Email *" id="email" className="form-control" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="password" className="text-info">Password:</label><br />
+                    <input type="password" onChange={this.handleChange} placeholder="Your Password *" id="password" className="form-control" />
+                  </div>
+                  <div className="form-group">
+                    <input type="submit" name="submit" className="btn btn-info btn-md" value="Login" />
+                  </div>
+                  <div className="text-warning text-center">{authError}</div>
+                </form>
+              </div>
+            </div>
           </div>
-          <div className="input-field">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" onChange={this.handleChange} />
-          </div>
-          <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Login</button>
-          </div>
-          <div className="center red-text">
-            {/* <div className="container center">{authError ? <h4>{authError}</h4> : ""}</div> */}
-          </div>
-        </form>
+        </div>
       </div>
     )
   }
 }
 const mapStateToProps = (state, ownProps) => {
   return {
-    // auth: state.auth,
-    // uid: state.firebase.auth.uid
+    auth: state.auth,
+    uid: state.firebase.auth.uid
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
