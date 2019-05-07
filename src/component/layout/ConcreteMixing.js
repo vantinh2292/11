@@ -3,6 +3,7 @@ import { firebaseConnection } from '../../firebase';
 import { Col, Row } from 'shards-react';
 import { connect } from 'react-redux';
 import ImageFormEdit from './ImageFormEdit';
+import LabelFormEdit from './LabelFormEdit';
 import img from '../../images/PnlSynoptic_Tramtronbetong.png'
 import CSC_R from '../../images/CSC_R.gif'
 import SG1_R from '../../images/SG1_R.gif'
@@ -114,6 +115,7 @@ class ConcreteMixing extends Component {
                 return (
                     <Label
                         key={key}
+                        i={value.key}
                         text={value.text}
                         top={value.top}
                         left={value.left} />
@@ -131,6 +133,7 @@ class ConcreteMixing extends Component {
                     </div>
                 </Col >
                 {this.props.editImage === true ? <ImageFormEdit /> : ''}
+                {this.props.editLabel === true ? <LabelFormEdit /> : ''}
             </Row>
         )
     };

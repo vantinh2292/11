@@ -11,3 +11,33 @@ export const pushDataLabel = (newLabel) => {
         // dispatch({ type: 'ADD_DATA' })
     }
 }
+export const actionToggleLabel=(editLabel) => {
+    return (dispatch) => {
+        let Label = {
+            idLabel:editLabel.idLabel,
+            text:editLabel.text,
+            top:editLabel.top,
+            left:editLabel.left
+        }
+        dispatch({ type: 'TOGGLE_LABEL',Label})
+    }
+}
+export const actionUpdateLabel=(editLabel) => {
+    return (dispatch) => {
+        let Label = {
+            idLabel:editLabel.idLabel,
+            text:editLabel.text,
+            top:editLabel.top,
+            left:editLabel.left
+        }
+        if(editLabel.idLabel!==''){
+            dataSnapshot.child(editLabel.idLabel).update({
+                text:editLabel.text,
+                left:editLabel.left,
+                top:editLabel.top
+            })
+            // dispatch({ type: 'UPDATE_LABEL',Label})
+        }
+        
+    }
+}

@@ -55,13 +55,15 @@ export const authReducer = (state = initState, action) => {
             console.log('TOGGLE EDIT IMAGE');
             return {
                 ...state,
-                editImage: !state.editImage
+                editImage: !state.editImage,
+                editLabel:false
             };
         case 'TOGGLE_EDIT_LABEL':
             console.log('TOGGLE EDIT LABEL');
             return {
                 ...state,
-                editLabel: !state.editLabel
+                editLabel: !state.editLabel,
+                editImage:false
             };
         default:
             return state

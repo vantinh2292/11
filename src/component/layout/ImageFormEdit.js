@@ -49,7 +49,7 @@ class ImageFormEdit extends Component {
                         <small id="top" className="form-text text-muted">Top</small>
                         <input defaultValue={this.props.top} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="top" id="top" aria-describedby="helpIdTitle" placeholder="Top: " />
                     </div>
-                    <button type="reset" onClick=
+                    <button type="button" onClick=
                     {() => this.props.actionUpdateImage({
                         idImage:this.state.idImage, 
                         src:this.state.src, 
