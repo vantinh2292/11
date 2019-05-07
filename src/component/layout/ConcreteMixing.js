@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { firebaseConnection } from '../../firebase';
+import { Col, Row } from 'shards-react';
+import { connect } from 'react-redux';
+import ImageFormEdit from './ImageFormEdit';
 import img from '../../images/PnlSynoptic_Tramtronbetong.png'
 import CSC_R from '../../images/CSC_R.gif'
 import SG1_R from '../../images/SG1_R.gif'
@@ -10,7 +13,7 @@ import CC2_R from '../../images/CC2_R.gif'
 import BE2_R from '../../images/BE2_R.gif'
 import Image from './Image';
 import Label from './Label';
-export default class ConcreteMixing extends Component {
+class ConcreteMixing extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -93,11 +96,12 @@ export default class ConcreteMixing extends Component {
         ];
         if (this.state.dataFirebaseImage.length > 0) {
             return this.state.dataFirebaseImage.map((value, key) => {
-                const temp = arrImage.find(x => x.name === value.src).src;
                 return (
                     <Image
                         key={key}
-                        url={temp}
+                        i={value.key}
+                        url={arrImage.find(x => x.name === value.src).src}
+                        src={value.src}
                         top={value.top}
                         left={value.left} />
                 )
@@ -119,14 +123,22 @@ export default class ConcreteMixing extends Component {
     }
     render() {
         return (
-            <div style={{ overflow: "auto" }}>
-                <div className="tramtronbetong" style={{ backgroundImage: `url(${img})`, position: 'relative' }}>
-                    {this.getImage()}
-                    {this.getLabel()}
-                </div>
-            </div >
+            <Row>
+                <Col style={{ overflow: "auto" }}>
+                    <div className="tramtronbetong" style={{ backgroundImage: `url(${img})`, position: 'relative' }}>
+                        {this.getImage()}
+                        {this.getLabel()}
+                    </div>
+                </Col >
+                {this.props.editImage === true ? <ImageFormEdit /> : ''}
+            </Row>
         )
     };
 
 }
+const mapStateToProps = (state, ownProps) => ({
+    editImage: state.auth.editImage,
+    editLabel: state.auth.editLabel
+})
 
+export default connect(mapStateToProps)(ConcreteMixing);

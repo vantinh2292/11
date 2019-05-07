@@ -33,7 +33,6 @@ class SignIn extends Component {
     }
     return (
       <div id="login">
-        <h3 className="text-center text-white pt-5">Login form</h3>
         <div className="container">
           <div id="login-row" className="row justify-content-center align-items-center">
             <div id="login-column" className="col-md-6">
@@ -57,32 +56,6 @@ class SignIn extends Component {
             </div>
           </div>
         </div>
-
-        <div className="example">
-          <Button>Primary</Button>
-          <Button theme="secondary">Secondary</Button>
-          <Button theme="success">Success</Button>
-          <Button theme="info">Info</Button>
-          <Button theme="warning">Warning</Button>
-          <Button theme="danger">Danger</Button>
-          <Button theme="light">Light</Button>
-          <Button theme="dark">Dark</Button>
-        </div>
-        <strong className="text-muted d-block mb-2">Toggle Switches</strong>
-        <fieldset>
-          <FormCheckbox toggle small>
-            Default
-      </FormCheckbox>
-          <FormCheckbox toggle small defaultChecked>
-            Checked
-      </FormCheckbox>
-          <FormCheckbox toggle small disabled>
-            Disabled
-      </FormCheckbox>
-          <FormCheckbox toggle small defaultChecked disabled>
-            Disabled Checked
-      </FormCheckbox>
-        </fieldset>
       </div>
     )
   }

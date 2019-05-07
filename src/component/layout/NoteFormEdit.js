@@ -18,20 +18,22 @@ class NoteFormEdit extends Component {
         });
     };
     //WARNING! To be deprecated in React v17. Use componentDidMount instead.
-    componentWillMount() {
-        if (this.props.editItem) {
+
+    componentDidUpdate(prevProps, prevState) {
+        // only update chart if the data has changed
+        if (prevProps.ItemChoise !== this.props.ItemChoise) {
             this.setState({
                 i: this.props.ItemChoise,
                 titleNote: this.props.editItem.titleNote,
                 contentNote: this.props.editItem.contentNote
             })
         }
-    }
+      }
     render() {
         return (
             <div className="col-4">
                 <h4>SỬA NỘI DUNG NOTE</h4>
-                <form key={this.props.ItemChoise}>
+                <form onChange={console.log('123')} key={this.props.ItemChoise}>
                     <div className="form-group">
                         <label htmlFor="titleNote">SỬA NỘI DUNG NOTE</label>
                         <input defaultValue={this.props.editItem.titleNote} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="titleNote" id="titleNote" aria-describedby="helpIdTitle" placeholder="Tiêu đề note" />

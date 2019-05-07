@@ -53,3 +53,18 @@ export const updateProfile = (profile) => {
         });
     }
 }
+
+export const toggleEditImage=()=>{
+    return(dispatch,getState)=>{
+        if(getState().firebase.auth.uid==='S5sPGpvaNuWQXms4iPH8VXo3pu93'){
+            dispatch({type:'TOGGLE_EDIT_IMAGE'})
+        }
+    }
+}
+export const toggleEditLabel=()=>{
+    return(dispatch,getState)=>{
+        if(getState().firebase.auth.uid==='S5sPGpvaNuWQXms4iPH8VXo3pu93'){
+            dispatch({type:'TOGGLE_EDIT_LABEL'})
+        }
+    }
+}

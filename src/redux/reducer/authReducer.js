@@ -1,5 +1,7 @@
 const initState = {
-    authError: null
+    authError: null,
+    editImage: false,
+    editLabel: false
 }
 export const authReducer = (state = initState, action) => {
     switch (action.type) {
@@ -48,6 +50,18 @@ export const authReducer = (state = initState, action) => {
             return {
                 ...state,
                 authError: action.err.message
+            };
+        case 'TOGGLE_EDIT_IMAGE':
+            console.log('TOGGLE EDIT IMAGE');
+            return {
+                ...state,
+                editImage: !state.editImage
+            };
+        case 'TOGGLE_EDIT_LABEL':
+            console.log('TOGGLE EDIT LABEL');
+            return {
+                ...state,
+                editLabel: !state.editLabel
             };
         default:
             return state

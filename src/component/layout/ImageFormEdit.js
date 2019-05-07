@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {actionEditData} from '../../redux/actions/noteAction'
+import { Col, Row } from 'shards-react';
+import {actionUpdateImage} from '../../redux/actions/imageAction'
 class ImageFormEdit extends Component {
     constructor(props) {
         super(props);
@@ -18,51 +19,62 @@ class ImageFormEdit extends Component {
             [name]: value
         });
     };
-    //WARNING! To be deprecated in React v17. Use componentDidMount instead.
-    componentWillMount() {
-        if (this.props.editItem) {
+
+    componentDidUpdate(prevProps, prevState) {
+        // only update chart if the data has changed
+        if (prevProps.idImage !== this.props.idImage) {
             this.setState({
-                i: this.props.ItemChoise,
-                titleNote: this.props.editItem.titleNote,
-                contentNote: this.props.editItem.contentNote
+                idImage: this.props.idImage,
+                src: this.props.src,
+                left: this.props.left,
+                top: this.props.top
             })
         }
-    }
+      }
     render() {
         return (
-            <div className="col-4">
-                <h4>CHANGE IMAGE PARAMETER</h4>
-                <form key={this.props.ItemChoise}>
+            <Col sm="12" md="4" lg="3">
+                <h4 style={{textAlign:"center"}}>CHANGE IMAGE PARAMETER</h4>
+                <form key={this.props.idImage}>
                     <div className="form-group">
-                        <label htmlFor="titleNote">CHANGE IMAGE PARAMETER</label>
-                        <input defaultValue={this.props.imageChoise.idImage} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="idImage" id="idImage" aria-describedby="helpIdTitle" placeholder="ID IMAGE: " />
-                        <small id="helpIdTitle" className="form-text text-muted">ID IMAGE</small>
+                        <small id="idImage" className="form-text text-muted">ID Image</small>
+                        <input defaultValue={this.props.idImage} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="idImage" id="idImage" aria-describedby="helpIdTitle" placeholder="ID Image: " />
 
-                        <input defaultValue={this.props.imageChoise.src} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="src" id="src" aria-describedby="helpIdTitle" placeholder="ID IMAGE: " />
-                        <small id="helpIdTitle" className="form-text text-muted">ID IMAGE</small>
-                        <input defaultValue={this.props.editItem.titleNote} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="idImage" id="idImage" aria-describedby="helpIdTitle" placeholder="ID IMAGE: " />
-                        <small id="helpIdTitle" className="form-text text-muted">ID IMAGE</small>
-                        <input defaultValue={this.props.editItem.titleNote} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="idImage" id="idImage" aria-describedby="helpIdTitle" placeholder="ID IMAGE: " />
-                        <small id="helpIdTitle" className="form-text text-muted">ID IMAGE</small>
+                        <small id="src" className="form-text text-muted">Name Image</small>
+                        <input defaultValue={this.props.src} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="src" id="src" aria-describedby="helpIdTitle" placeholder="Name Image: " />
+
+                        <small id="left" className="form-text text-muted">Left</small>
+                        <input defaultValue={this.props.left} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="left" id="left" aria-describedby="helpIdTitle" placeholder="Left: " />
+
+                        <small id="top" className="form-text text-muted">Top</small>
+                        <input defaultValue={this.props.top} onChange={(evt) => { this.isChange(evt) }} type="text" className="form-control" name="top" id="top" aria-describedby="helpIdTitle" placeholder="Top: " />
                     </div>
-                    <button type="reset" onClick={() => this.props.actionEditData({titleNote:this.state.titleNote, contentNote:this.state.contentNote}) } className="btn btn-primary btn-block">Lưu</button>
+                    <button type="reset" onClick=
+                    {() => this.props.actionUpdateImage({
+                        idImage:this.state.idImage, 
+                        src:this.state.src, 
+                        left:this.state.left, 
+                        top:this.state.top, 
+                    })}
+                     className="btn btn-primary btn-block">Update</button>
                 </form>
-            </div>
+            </Col>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        editItem: state.note.editItem,
-        ItemChoise: state.note.ItemChoise,
-        titleForm: state.note.titleForm
+        idImage: state.image.idImage,
+        src: state.image.src,
+        left: state.image.left,
+        top: state.image.top
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        actionEditData: (editItem) => {
-            dispatch(actionEditData(editItem))
+        actionUpdateImage: (editItem) => {
+            dispatch(actionUpdateImage(editItem))
         }
     }
 }
