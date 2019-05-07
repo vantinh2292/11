@@ -7,7 +7,7 @@ class Link_Scada extends Component {
         // console.log('initial', profileUser);
         return (
             <div>
-                <NavLink className="nav-link" to='/concrete'>Mixing</NavLink>
+                <NavLink className="nav-link" to='/concrete'>MIXING</NavLink>
             </div>
         )
     }

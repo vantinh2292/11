@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { signOut } from '../../redux/actions/authAction'
+import { Col, FormCheckbox } from "shards-react";
+
 class Link_User extends Component {
     render() {
         // const { profileUser, signOut } = this.props;
@@ -9,12 +11,12 @@ class Link_User extends Component {
         return (
             <ul className="right">
                 <div className="btn-group">
-                    <button 
-                    type="button" 
-                    className="btn btn-info dropdown-toggle" 
-                    data-toggle="dropdown" 
-                    aria-haspopup="true" 
-                    aria-expanded="false"
+                    <button
+                        type="button"
+                        className="btn btn-info dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
                     >
                         {this.props.nameUser}
                     </button>
@@ -22,6 +24,11 @@ class Link_User extends Component {
                         <button className="dropdown-item" onClick={this.props.signOut}>Log Out</button>
                         <NavLink className="dropdown-item" to='/profile'>Update Profile</NavLink>
                         <div className="dropdown-divider"></div>
+                        <FormCheckbox
+                            toggle
+                            >
+                             Rockets
+                        </FormCheckbox>
                     </div>
                 </div>
             </ul>
@@ -29,8 +36,8 @@ class Link_User extends Component {
     }
 }
 const mapStateToProps = (state, ownProps) => {
-    return{
-        nameUser:state.firebase.auth.displayName
+    return {
+        nameUser: state.firebase.auth.displayName
     }
 }
 

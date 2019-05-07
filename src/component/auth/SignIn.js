@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-
+import { Button, FormCheckbox } from "shards-react";
 import { signIn } from '../../redux/actions/authAction'
 import { Redirect } from 'react-router-dom';
 // import '../css/SignIn.css'
 class SignIn extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    checked: false
   }
   handleSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +19,11 @@ class SignIn extends Component {
       [e.target.id]: e.target.value
     })
   };
+  handleChange1() {
+    this.setState({
+      checked: !this.state.checked
+    });
+  }
 
   render() {
     const { authError } = this.props.auth;
@@ -51,6 +57,32 @@ class SignIn extends Component {
             </div>
           </div>
         </div>
+
+        <div className="example">
+          <Button>Primary</Button>
+          <Button theme="secondary">Secondary</Button>
+          <Button theme="success">Success</Button>
+          <Button theme="info">Info</Button>
+          <Button theme="warning">Warning</Button>
+          <Button theme="danger">Danger</Button>
+          <Button theme="light">Light</Button>
+          <Button theme="dark">Dark</Button>
+        </div>
+        <strong className="text-muted d-block mb-2">Toggle Switches</strong>
+        <fieldset>
+          <FormCheckbox toggle small>
+            Default
+      </FormCheckbox>
+          <FormCheckbox toggle small defaultChecked>
+            Checked
+      </FormCheckbox>
+          <FormCheckbox toggle small disabled>
+            Disabled
+      </FormCheckbox>
+          <FormCheckbox toggle small defaultChecked disabled>
+            Disabled Checked
+      </FormCheckbox>
+        </fieldset>
       </div>
     )
   }

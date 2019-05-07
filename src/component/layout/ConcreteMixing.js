@@ -9,18 +9,20 @@ import CR1_R from '../../images/CR1_R.gif'
 import CC2_R from '../../images/CC2_R.gif'
 import BE2_R from '../../images/BE2_R.gif'
 import Image from './Image';
+import Label from './Label';
 export default class ConcreteMixing extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            dataFirebase: []
+            dataFirebaseImage: [],
+            dataFirebaseLabel: [],
         }
     }
     componentWillMount() {
         var datasnapshot = firebaseConnection.database().ref('Table1/Image');
         // var datasnapshot = firebaseConnection.database().ref('Table1/Note').orderByChild('metrics/views');
         datasnapshot.on('value', (images) => {
-            var arrData = [];
+            let arrData = [];
             images.forEach(element => {
                 const key = element.key;
                 const src = element.val().src;
@@ -34,11 +36,31 @@ export default class ConcreteMixing extends Component {
                 });
             });
             this.setState({
-                dataFirebase: arrData
+                dataFirebaseImage: arrData
+            })
+        })
+        //connect label
+        datasnapshot = firebaseConnection.database().ref('Table1/Label');
+        datasnapshot.on('value', (labels) => {
+            let arrData = [];
+            labels.forEach(element => {
+                const key = element.key;
+                const text = element.val().text;
+                const left = element.val().left;
+                const top = element.val().top;
+                arrData.push({
+                    key: key,
+                    text: text,
+                    left: left,
+                    top: top
+                });
+            });
+            this.setState({
+                dataFirebaseLabel: arrData
             })
         })
     }
-    getData = () => {
+    getImage = () => {
         const arrImage = [
             {
                 src: CSC_R,
@@ -69,8 +91,8 @@ export default class ConcreteMixing extends Component {
                 name: 'BE2'
             }
         ];
-        if (this.state.dataFirebase.length > 0) {
-            return this.state.dataFirebase.map((value, key) => {
+        if (this.state.dataFirebaseImage.length > 0) {
+            return this.state.dataFirebaseImage.map((value, key) => {
                 const temp = arrImage.find(x => x.name === value.src).src;
                 return (
                     <Image
@@ -82,11 +104,25 @@ export default class ConcreteMixing extends Component {
             })
         }
     }
+    getLabel = () => {
+        if (this.state.dataFirebaseLabel.length > 0) {
+            return this.state.dataFirebaseLabel.map((value, key) => {
+                return (
+                    <Label
+                        key={key}
+                        text={value.text}
+                        top={value.top}
+                        left={value.left} />
+                )
+            })
+        }
+    }
     render() {
         return (
             <div style={{ overflow: "auto" }}>
                 <div className="tramtronbetong" style={{ backgroundImage: `url(${img})`, position: 'relative' }}>
-                    {this.getData()}
+                    {this.getImage()}
+                    {this.getLabel()}
                 </div>
             </div >
         )
