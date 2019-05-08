@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { connect } from 'react-redux';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
@@ -11,12 +12,13 @@ import UpdateProfile from './component/auth/UpdateProfile';
 import ConcreteMixing from './component/layout/ConcreteMixing';
 import Image_Form_Create from './component/layout/Image_Form_Create';
 import Label_Form_Create from './component/layout/Label_Form_Create';
-export default class App extends Component {
+import DashboardChart from './component/layout/chart/DashboardChart';
+class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Nav />
+          {this.props.openPageFull?'':<Nav />}
           <Switch>
             <Route exact path='/' component={Dashboard} />
             <Route path='/signin' component={SignIn} />
@@ -25,6 +27,7 @@ export default class App extends Component {
             <Route path='/concrete' component={ConcreteMixing} />
             <Route path='/pushimage' component={Image_Form_Create} />
             <Route path='/pushlabel' component={Label_Form_Create} />
+            <Route path='/chart' component={DashboardChart} />
           </Switch>
         </div>
       </BrowserRouter>
@@ -32,4 +35,8 @@ export default class App extends Component {
     );
   }
 }
+const mapStateToProps = (state, ownProps) => ({
+  openPageFull:state.navPageFull.openPageFull
+})
 
+export default connect(mapStateToProps)(App)

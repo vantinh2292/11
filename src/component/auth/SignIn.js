@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Button, FormCheckbox } from "shards-react";
+// import { Button, FormCheckbox } from "shards-react";
 import { signIn } from '../../redux/actions/authAction'
 import { Redirect } from 'react-router-dom';
 // import '../css/SignIn.css'

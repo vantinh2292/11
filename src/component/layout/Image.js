@@ -18,10 +18,11 @@ class Image extends Component {
         };
         
     return (
-            <img onClick={this.handleImageClick} alt="image" src={this.props.url} style={imageStyle}/>
+            <img onClick={this.handleImageClick} alt="image_object" src={this.props.url} style={imageStyle}/>
         )
     }
 }
+
 const mapStateToProps = (state, ownProps) => ({
     
 })

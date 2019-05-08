@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import { pushDataLabel } from '../../redux/actions/labelAction'
 class Label_Form_Create extends Component {
   state = {
@@ -19,7 +19,6 @@ class Label_Form_Create extends Component {
   };
 
   render() {
-    const { uid } = this.props;
     const { authError } = this.props.auth;
 
     return (

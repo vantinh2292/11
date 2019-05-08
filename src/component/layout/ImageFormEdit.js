@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Col, Row } from 'shards-react';
+import { Col } from 'shards-react';
 import {actionUpdateImage} from '../../redux/actions/imageAction'
 class ImageFormEdit extends Component {
     constructor(props) {

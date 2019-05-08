@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import Link_SigneIn_SignOut from './Link_SigneIn_SignOut'
-import Link_User from './Link_User'
-import Link_Scada from './Link_Scada';
+import LinkSigneInSignOut from './LinkSigneInSignOut'
+import LinkUser from './LinkUser'
+import LinkScada from './LinkScada';
 class Nav extends Component {
     render() {
         const { UID } = this.props;
@@ -14,9 +14,8 @@ class Nav extends Component {
                     <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation" />
                     <div className="collapse navbar-collapse justify-content-end" id="collapsibleNavId">
                         <ul className="navbar-nav mt-2 mt-lg-0">
-                            {UID ? <Link_Scada/> : ''}
-                            <NavLink className="navbar-brand" to='/'>Home</NavLink>
-                            {!UID ? <Link_SigneIn_SignOut /> : <Link_User />}
+                            {UID ? <LinkScada/> : ''}
+                            {!UID ? <LinkSigneInSignOut /> : <LinkUser />}
                         </ul>
 
                     </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Col, Row } from 'shards-react';
+import { Col } from 'shards-react';
 import {actionUpdateLabel} from '../../redux/actions/labelAction'
 class LabelFormEdit extends Component {
     constructor(props) {

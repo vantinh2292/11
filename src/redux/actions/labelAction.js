@@ -24,12 +24,6 @@ export const actionToggleLabel=(editLabel) => {
 }
 export const actionUpdateLabel=(editLabel) => {
     return (dispatch) => {
-        let Label = {
-            idLabel:editLabel.idLabel,
-            text:editLabel.text,
-            top:editLabel.top,
-            left:editLabel.left
-        }
         if(editLabel.idLabel!==''){
             dataSnapshot.child(editLabel.idLabel).update({
                 text:editLabel.text,

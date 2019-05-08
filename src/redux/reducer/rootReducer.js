@@ -5,13 +5,17 @@ import {firebaseReducer} from 'react-redux-firebase'
 import { authReducer } from './authReducer';
 import {imageReducer} from './imageReducer';
 import {labelReducer} from './labelReducer'
+import { chartReducer } from './chartReducer';
+import { navReducer } from './navReducer';
 
 const rootReducer=combineReducers({
     auth:authReducer,
     note:noteReducer,
     image:imageReducer,
     label:labelReducer,
+    navPageFull:navReducer,
     firestore:firestoreReducer,
-    firebase:firebaseReducer
+    firebase:firebaseReducer,
+    chartData:chartReducer
 });
 export default rootReducer;
