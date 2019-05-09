@@ -6,12 +6,19 @@ import ImageFormEdit from './ImageFormEdit';
 import LabelFormEdit from './LabelFormEdit';
 import img from '../../images/PnlSynoptic_Tramtronbetong.png'
 import CSC_R from '../../images/CSC_R.gif'
+import CSC_S from '../../images/CSC_S.gif'
 import SG1_R from '../../images/SG1_R.gif'
+import SG1_S from '../../images/SG1_S.gif'
 import MIX1_R from '../../images/MIX1_R.gif'
+import MIX1_S from '../../images/MIX1_S.gif'
 import SGMIX_R from '../../images/SGMIX_R.gif'
+import SGMIX_S from '../../images/SGMIX_S.gif'
 import CR1_R from '../../images/CR1_R.gif'
+import CR1_S from '../../images/CR1_S.gif'
 import CC2_R from '../../images/CC2_R.gif'
+import CC2_S from '../../images/CC2_S.gif'
 import BE2_R from '../../images/BE2_R.gif'
+import BE2_S from '../../images/BE2_S.gif'
 import Image from './Image';
 import Label from './Label';
 import ForceElement from './ForceElement';
@@ -34,13 +41,15 @@ class ConcreteMixing extends Component {
                 const src = element.val().src;
                 const left = element.val().left;
                 const top = element.val().top;
-                const nameElement = element.val().nameElement
+                const nameElement = element.val().nameElement;
+                const stateElement=element.val().state;
                 arrData.push({
                     key: key,
                     src: src,
                     left: left,
                     top: top,
-                    nameElement: nameElement
+                    nameElement: nameElement,
+                    stateElement:stateElement
                 });
             });
             this.setState({
@@ -71,45 +80,57 @@ class ConcreteMixing extends Component {
     getImage = () => {
         const arrImage = [
             {
-                src: CSC_R,
+                src_R: CSC_R,
+                src_S: CSC_S,
                 name: 'CSC'
             },
             {
-                src: SG1_R,
+                src_R: SG1_R,
+                src_S: SG1_S,
                 name: 'SG1'
             },
             {
-                src: MIX1_R,
+                src_R: MIX1_R,
+                src_S: MIX1_S,
                 name: 'MIX1'
             },
             {
-                src: SGMIX_R,
+                src_R: SGMIX_R,
+                src_S: SGMIX_S,
                 name: 'SGMIX'
             },
             {
-                src: CR1_R,
+                src_R: CR1_R,
+                src_S: CR1_S,
                 name: 'CR1'
             },
             {
-                src: CC2_R,
+                src_R: CC2_R,
+                src_S: CC2_S,
                 name: 'CC2'
             },
             {
-                src: BE2_R,
+                src_R: BE2_R,
+                src_S: BE2_S,
                 name: 'BE2'
             }
         ];
         if (this.state.dataFirebaseImage.length > 0) {
             return this.state.dataFirebaseImage.map((value, key) => {
+                const imageView=arrImage.find(x => x.name === value.src)
+                var src='';
+                if(value.stateElement===1)src=imageView.src_R;
+                if(value.stateElement===0)src=imageView.src_S;
                 return (
                     <Image
                         key={key}
                         i={value.key}
-                        url={arrImage.find(x => x.name === value.src).src}
+                        url={src}
                         src={value.src}
                         top={value.top}
                         left={value.left}
                         nameElement={value.nameElement}
+                        stateElement={value.stateElement}
                     />
                 )
             })

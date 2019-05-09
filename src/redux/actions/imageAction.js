@@ -45,7 +45,7 @@ export const actionUpdateImage = (editImage) => {
                 src: editImage.src,
                 left: editImage.left,
                 top: editImage.top,
-                nameElement:editImage.nameElement
+                nameElement:editImage.nameElement,
             })
             dispatch({ type: 'UPDATE_IMAGE', Image })
         }

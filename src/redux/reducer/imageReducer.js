@@ -3,7 +3,8 @@ const initState = {
     src: '',
     left: '',
     top: '',
-    nameElement: ''
+    nameElement: '',
+    state:''
 }
 export const imageReducer = (state = initState, action) => {
     switch (action.type) {
@@ -21,6 +22,7 @@ export const imageReducer = (state = initState, action) => {
         console.log('CLICK_IMAGE')
             return {
                 ...state,
+                idImage: action.Image.idImage,
                 left: action.Image.left,
                 top: action.Image.top,
                 nameElement: action.Image.nameElement
