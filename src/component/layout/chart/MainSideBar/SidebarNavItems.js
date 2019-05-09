@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav } from "shards-react";
 import SidebarNavItem from "./SidebarNavItem";
-import navItems from './data/sidebar-nav-items'
+import navItems from './data/routeMainSideBar'
 class SidebarNavItems extends React.Component {
   constructor(props) {
     super(props)
@@ -14,7 +14,7 @@ class SidebarNavItems extends React.Component {
     return (
       <div className="nav-wrapper">
         <Nav className="nav--no-borders flex-column">
-          {this.state.navItems().map((item, idx) => (
+          {this.state.navItems.map((item, idx) => (
             <SidebarNavItem key={idx} item={item}/>
           ))}
         </Nav>

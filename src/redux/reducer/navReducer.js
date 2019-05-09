@@ -1,7 +1,5 @@
-import navItems from '../../component/layout/chart/MainSideBar/data/sidebar-nav-items'
 const initState = {
     openPageFull: false,
-    navItems: navItems,
     index: 1
 
 }

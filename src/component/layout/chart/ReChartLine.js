@@ -1,26 +1,83 @@
-import React, { Component } from 'react'
-import { LineChart, Line } from 'recharts';
+import React, { PureComponent } from 'react';
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+} from 'recharts';
+
 const data = [
-    {name: 'Page A', uv: 400, pv: 2100, amt: 2400 },
-    {name: 'Page B', uv: 410, pv: 2200, amt: 2400 },
-    {name: 'Page C', uv: 420, pv: 2300, amt: 2400 },
-    {name: 'Page D', uv: 430, pv: 2200, amt: 2400 },
-    {name: 'Page E', uv: 440, pv: 2100, amt: 2400 },
-    {name: 'Page F', uv: 450, pv: 2400, amt: 2400 },
-    {name: 'Page G', uv: 460, pv: 2600, amt: 2400 },
-    {name: 'Page H', uv: 470, pv: 2700, amt: 2400 },
-    {name: 'Page I', uv: 480, pv: 2500, amt: 2400 },
-    {name: 'Page J', uv: 440, pv: 2400, amt: 2400 },
-    {name: 'Page K', uv: 430, pv: 2300, amt: 2400 },
-    {name: 'Page Z', uv: 400, pv: 2200, amt: 2400 },
+  {
+    name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
+  },
+  {
+    name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
+  },
+  {
+    name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
+  },
+  {
+    name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
+  },
+  {
+    name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
+  },
+  {
+    name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
+  },
+  {
+    name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
+  },
 ];
 
-export default class ReChartLine extends Component {
-    render() {
-        return (
-            <LineChart width={400} height={400} data={data}>
-                <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-            </LineChart>
-        )
-    }
+export default class ReChartLine extends PureComponent {
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/1p40zzfe/';
+
+  state = {
+    opacity: {
+      uv: 1,
+      pv: 1,
+    },
+  };
+
+  handleMouseEnter = (o) => {
+    const { dataKey } = o;
+    const { opacity } = this.state;
+
+    this.setState({
+      opacity: { ...opacity, [dataKey]: 0.5 },
+    });
+  }
+
+  handleMouseLeave = (o) => {
+    const { dataKey } = o;
+    const { opacity } = this.state;
+
+    this.setState({
+      opacity: { ...opacity, [dataKey]: 1 },
+    });
+  }
+
+  render() {
+    const { opacity } = this.state;
+
+    return (
+      <div>
+        <LineChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 5, right: 30, left: 20, bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} />
+          <Line type="monotone" dataKey="pv" strokeOpacity={opacity.pv} stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="uv" strokeOpacity={opacity.uv} stroke="#82ca9d" />
+        </LineChart>
+        <p className="notes">Tips: Hover the legend !</p>
+      </div>
+    );
+  }
 }
