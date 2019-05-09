@@ -9,3 +9,8 @@ export const actionToggleFalseNavPageFull = () => {
         dispatch({ type: 'TOGGLE_FALSE_NAV_PAGE_FULL' })
     }
 }
+export const actionChangeIndex=(index)=>{
+    return (dispatch)=>{
+        dispatch({type:'CHANGE_INDEX',index})
+    }
+}

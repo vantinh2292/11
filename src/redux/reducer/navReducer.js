@@ -1,5 +1,9 @@
+import navItems from '../../component/layout/chart/MainSideBar/data/sidebar-nav-items'
 const initState = {
-    openPageFull: false
+    openPageFull: false,
+    navItems: navItems,
+    index: 1
+
 }
 export const navReducer = (state = initState, action) => {
     switch (action.type) {
@@ -15,6 +19,13 @@ export const navReducer = (state = initState, action) => {
                 ...state,
                 openPageFull: false
             };
+        case 'CHANGE_INDEX':
+            console.log('CHANGE INDEX ');
+            return {
+                ...state,
+                index: action.index
+            };
+
         default:
             return state
     }
