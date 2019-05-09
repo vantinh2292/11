@@ -1,21 +1,33 @@
 import React, { Component } from 'react'
-
-export default class ForceElement extends Component {
+import { connect } from 'react-redux';
+class ForceElement extends Component {
     render() {
+        const modifiTop=parseInt(this.props.top)>50?parseInt(this.props.top)-30:parseInt(this.props.top)+150;
+        const ForceElementStyle = {
+            position:'absolute',
+            top: modifiTop,
+            left:parseInt(this.props.left),
+            zIndex: 1, 
+            width: 250
+        };
         return (
-            <div>
-                <div>
-                    <div id="ForceButton" style={{ position: 'absolute', left: -100, top: -100, zIndex: 1, width: 300 }}>
-                        <div id="ForceButton_Text" style={{ fontSize: 30, color: 'red', backgroundColor: 'darkcyan', display: 'flex', justifyContent: 'center' }}>12312312321
-            </div>
-                        <div className="btn-group" style={{ width: 300 }}>
-                            <button id="RunClick" type="button" style={{ width: 100, fontSize: 25 }} className="btn btn-primary">RUN</button>
-                            <button id="AutoClick" type="button" style={{ width: 100, fontSize: 25 }} className="btn btn-success">AUTO</button>
-                            <button id="StopClick" type="button" style={{ width: 100, fontSize: 25 }} className="btn btn-danger">STOP</button>
-                        </div>
-                    </div>
+            <div id="ForceButton" style={ForceElementStyle}>
+                <div id="ForceButton_Text" style={{ fontSize: 25, color: 'red', backgroundColor: 'darkcyan', display: 'flex', justifyContent: 'center' }}>{this.props.nameElement}
+                </div>
+                <div className="btn-group" style={{ width: 250 }}>
+                    <button id="RunClick" type="button" style={{ width: 70, fontSize: 18 }} className="btn btn-primary">RUN</button>
+                    <button id="AutoClick" type="button" style={{ width: 70, fontSize: 18 }} className="btn btn-success">AUTO</button>
+                    <button id="StopClick" type="button" style={{ width: 70, fontSize: 18 }} className="btn btn-danger">STOP</button>
                 </div>
             </div>
         )
     }
 }
+const mapStateToProps = (state, ownProps) => {
+    return {
+        nameElement: state.image.nameElement,
+        top: state.image.top,
+        left: state.image.left
+    }
+}
+export default connect(mapStateToProps)(ForceElement)

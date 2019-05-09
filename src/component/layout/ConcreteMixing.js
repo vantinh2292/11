@@ -15,6 +15,7 @@ import BE2_R from '../../images/BE2_R.gif'
 import Image from './Image';
 import Label from './Label';
 import ForceElement from './ForceElement';
+import {backgroundClick} from '../../redux/actions/backgroundAction'
 class ConcreteMixing extends Component {
     constructor(props) {
         super(props)
@@ -129,11 +130,12 @@ class ConcreteMixing extends Component {
         }
     }
     render() {
+
         return (
             <Row>
-            <ForceElement/>
+            {this.props.indexClick>0?<ForceElement/>:''}
                 <Col style={{ overflow: "auto" }}>
-                    <div className="tramtronbetong" style={{ backgroundImage: `url(${img})`, position: 'relative' }}>
+                    <div onClick={this.props.backgroundClick} className="tramtronbetong" style={{ backgroundImage: `url(${img})`, position: 'relative' }}>
                         {this.getImage()}
                         {this.getLabel()}
                     </div>
@@ -147,7 +149,15 @@ class ConcreteMixing extends Component {
 }
 const mapStateToProps = (state, ownProps) => ({
     editImage: state.auth.editImage,
-    editLabel: state.auth.editLabel
+    editLabel: state.auth.editLabel,
+    indexClick:state.background.indexClick
 })
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        backgroundClick: () => {
+            dispatch(backgroundClick())
+        }
+    }
+}
 
-export default connect(mapStateToProps)(ConcreteMixing);
+export default connect(mapStateToProps,mapDispatchToProps)(ConcreteMixing);

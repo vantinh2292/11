@@ -7,12 +7,13 @@ import {imageReducer} from './imageReducer';
 import {labelReducer} from './labelReducer'
 import { chartReducer } from './chartReducer';
 import { navReducer } from './navReducer';
-
+import {backgroundReducer} from './backgroundReducer'
 const rootReducer=combineReducers({
     auth:authReducer,
     note:noteReducer,
     image:imageReducer,
     label:labelReducer,
+    background:backgroundReducer,
     navPageFull:navReducer,
     firestore:firestoreReducer,
     firebase:firebaseReducer,

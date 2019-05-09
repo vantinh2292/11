@@ -13,17 +13,19 @@ export const pushData = (newImage) => {
 }
 export const actionToggleImage = (ImageChoise) => {
     return (dispatch, getState) => {
+        let Image = {
+            idImage: ImageChoise.idImage,
+            src: ImageChoise.src,
+            top: ImageChoise.top,
+            left: ImageChoise.left,
+            nameElement:ImageChoise.nameElement
+        }
         if (getState().auth.editImage) {
-            let Image = {
-                idImage: ImageChoise.idImage,
-                src: ImageChoise.src,
-                top: ImageChoise.top,
-                left: ImageChoise.left,
-                nameElement:ImageChoise.nameElement
-            }
             dispatch({ type: 'TOGGLE_IMAGE', Image })
         }else{
-            console.log('click image')
+            dispatch({ type: 'CLICK_IMAGE', Image })
+            dispatch({ type: 'BACKGROUND_IMAGE_CLICK' })
+            
         }
 
     }
