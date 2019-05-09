@@ -1,19 +1,20 @@
 {
   "files": {
     "main.css": "/static/css/main.36d714b0.chunk.css",
-    "main.js": "/static/js/main.12b6ca22.chunk.js",
-    "main.js.map": "/static/js/main.12b6ca22.chunk.js.map",
+    "main.js": "/static/js/main.9e12c519.chunk.js",
+    "main.js.map": "/static/js/main.9e12c519.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
     "static/css/2.266e55a5.chunk.css": "/static/css/2.266e55a5.chunk.css",
-    "static/js/2.2e3bd9e0.chunk.js": "/static/js/2.2e3bd9e0.chunk.js",
-    "static/js/2.2e3bd9e0.chunk.js.map": "/static/js/2.2e3bd9e0.chunk.js.map",
+    "static/js/2.cce7b64a.chunk.js": "/static/js/2.cce7b64a.chunk.js",
+    "static/js/2.cce7b64a.chunk.js.map": "/static/js/2.cce7b64a.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.9c90e82676cce9bdee7f90821c3d38f6.js": "/precache-manifest.9c90e82676cce9bdee7f90821c3d38f6.js",
+    "precache-manifest.ed678ba1413befcf25889624b8b6940a.js": "/precache-manifest.ed678ba1413befcf25889624b8b6940a.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.266e55a5.chunk.css.map": "/static/css/2.266e55a5.chunk.css.map",
     "static/css/main.36d714b0.chunk.css.map": "/static/css/main.36d714b0.chunk.css.map",
     "static/media/BE2_R.gif": "/static/media/BE2_R.c16f1875.gif",
-    "static/media/PnlSynoptic_Tramtronbetong.png": "/static/media/PnlSynoptic_Tramtronbetong.1b7e7e1c.png"
+    "static/media/PnlSynoptic_Tramtronbetong.png": "/static/media/PnlSynoptic_Tramtronbetong.1b7e7e1c.png",
+    "static/media/shards-dashboards-logo.svg": "/static/media/shards-dashboards-logo.60a85991.svg"
   }
 }

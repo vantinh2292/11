@@ -3,42 +3,50 @@ var dataSnapshot = firebaseConnection.database().ref('Table1/Image');
 export const pushData = (newImage) => {
     return (dispatch) => {
         let temp = {
-            src:newImage.src,
-            top:newImage.top,
-            left:newImage.left
+            src: newImage.src,
+            top: newImage.top,
+            left: newImage.left
         }
         dataSnapshot.push(temp);
         // dispatch({ type: 'ADD_DATA' })
     }
 }
-export const actionToggleImage=(editImage) => {
-    return (dispatch) => {
-        let Image = {
-            idImage:editImage.idImage,
-            src:editImage.src,
-            top:editImage.top,
-            left:editImage.left
+export const actionToggleImage = (ImageChoise) => {
+    return (dispatch, getState) => {
+        if (getState().auth.editImage) {
+            let Image = {
+                idImage: ImageChoise.idImage,
+                src: ImageChoise.src,
+                top: ImageChoise.top,
+                left: ImageChoise.left,
+                nameElement:ImageChoise.nameElement
+            }
+            dispatch({ type: 'TOGGLE_IMAGE', Image })
+        }else{
+            console.log('click image')
         }
-        dispatch({ type: 'TOGGLE_IMAGE',Image})
+
     }
 }
 
-export const actionUpdateImage=(editImage) => {
+export const actionUpdateImage = (editImage) => {
     return (dispatch) => {
         let Image = {
-            idImage:editImage.idImage,
-            src:editImage.src,
-            top:editImage.top,
-            left:editImage.left
+            idImage: editImage.idImage,
+            src: editImage.src,
+            top: editImage.top,
+            left: editImage.left,
+            nameElement:editImage.nameElement
         }
-        if(editImage.idImage!==''){
+        if (editImage.idImage !== '') {
             dataSnapshot.child(editImage.idImage).update({
-                src:editImage.src,
-                left:editImage.left,
-                top:editImage.top
+                src: editImage.src,
+                left: editImage.left,
+                top: editImage.top,
+                nameElement:editImage.nameElement
             })
-            dispatch({ type: 'UPDATE_IMAGE',Image})
+            dispatch({ type: 'UPDATE_IMAGE', Image })
         }
-        
+
     }
 }

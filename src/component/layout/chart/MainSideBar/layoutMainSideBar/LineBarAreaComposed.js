@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import {
   ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
-  Legend, Scatter,
+  Legend, 
 } from 'recharts';
 
 const data = [
@@ -31,8 +31,8 @@ export default class Example extends PureComponent {
   render() {
     return (
       <ComposedChart
-        width={500}
-        height={400}
+        width={900}
+        height={700}
         data={data}
         margin={{
           top: 20, right: 20, bottom: 20, left: 20,

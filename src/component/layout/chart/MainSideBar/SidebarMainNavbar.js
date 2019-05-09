@@ -2,7 +2,6 @@ import React from "react";
 import { Navbar, NavbarBrand } from "shards-react";
 import { connect } from 'react-redux';
 import { actionToggleFalseNavPageFull,actionToggleTrueNavPageFull } from '../../../../redux/actions/navAction'
-import { Redirect } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 class SidebarMainNavbar extends React.Component {

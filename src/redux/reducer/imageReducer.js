@@ -2,7 +2,8 @@ const initState = {
     idImage:'',
     src:'',
     left:'',
-    top:''
+    top:'',
+    nameElement:''
 }
 export const imageReducer = (state = initState, action) => {
     switch (action.type) {
@@ -13,7 +14,8 @@ export const imageReducer = (state = initState, action) => {
                 idImage: action.Image.idImage,
                 src:action.Image.src,
                 left:action.Image.left,
-                top:action.Image.top
+                top:action.Image.top,
+                nameElement:action.Image.nameElement
             };
         
         default:

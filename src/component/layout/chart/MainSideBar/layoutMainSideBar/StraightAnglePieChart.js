@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  PieChart, Pie, Sector, Cell,
+  PieChart, Pie,
 } from 'recharts';
 
 const data = [
@@ -14,8 +14,8 @@ export default class Example extends PureComponent {
 
   render() {
     return (
-      <PieChart width={400} height={400}>
-        <Pie dataKey="value" startAngle={180} endAngle={0} data={data} cx={200} cy={200} outerRadius={80} fill="#8884d8" label />
+      <PieChart width={1000} height={600}>
+        <Pie dataKey="value" startAngle={180} endAngle={0} data={data} cx={500} cy={300} outerRadius={200} fill="#8884d8" label />
       </PieChart>
     );
   }

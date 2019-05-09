@@ -13,7 +13,6 @@ import ConcreteMixing from './component/layout/ConcreteMixing';
 import Image_Form_Create from './component/layout/Image_Form_Create';
 import Label_Form_Create from './component/layout/Label_Form_Create';
 import DashboardChart from './component/layout/chart/DashboardChart';
-import routeMainSideBar from './component/layout/chart/MainSideBar/data/routeMainSideBar'
 class App extends Component {
   render() {
     return (

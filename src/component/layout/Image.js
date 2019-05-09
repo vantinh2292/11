@@ -7,7 +7,8 @@ class Image extends Component {
             idImage:this.props.i,
             src:this.props.src,
             left:this.props.left,
-            top:this.props.top
+            top:this.props.top,
+            nameElement:this.props.nameElement
         })
     }
     render() {

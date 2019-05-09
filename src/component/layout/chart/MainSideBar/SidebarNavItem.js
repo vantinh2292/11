@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { actionChangeIndex } from '../../../../redux/actions/navAction'
-import { NavLink as RouteNavLink } from "react-router-dom";
 import { NavItem, NavLink } from "shards-react";
 class SidebarNavItem extends Component {
   render() {

@@ -41,7 +41,7 @@ class CustomizedLabel extends PureComponent {
 class CustomizedAxisTick extends PureComponent {
   render() {
     const {
-      x, y, stroke, payload,
+      x, y, payload,
     } = this.props;
 
     return (
@@ -58,8 +58,8 @@ export default class Example extends PureComponent {
   render() {
     return (
       <LineChart
-        width={500}
-        height={300}
+        width={900}
+        height={700}
         data={data}
         margin={{
           top: 20, right: 30, left: 20, bottom: 10,

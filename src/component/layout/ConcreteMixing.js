@@ -14,6 +14,7 @@ import CC2_R from '../../images/CC2_R.gif'
 import BE2_R from '../../images/BE2_R.gif'
 import Image from './Image';
 import Label from './Label';
+import ForceElement from './ForceElement';
 class ConcreteMixing extends Component {
     constructor(props) {
         super(props)
@@ -32,11 +33,13 @@ class ConcreteMixing extends Component {
                 const src = element.val().src;
                 const left = element.val().left;
                 const top = element.val().top;
+                const nameElement = element.val().nameElement
                 arrData.push({
                     key: key,
                     src: src,
                     left: left,
-                    top: top
+                    top: top,
+                    nameElement: nameElement
                 });
             });
             this.setState({
@@ -104,7 +107,9 @@ class ConcreteMixing extends Component {
                         url={arrImage.find(x => x.name === value.src).src}
                         src={value.src}
                         top={value.top}
-                        left={value.left} />
+                        left={value.left}
+                        nameElement={value.nameElement}
+                    />
                 )
             })
         }
@@ -126,6 +131,7 @@ class ConcreteMixing extends Component {
     render() {
         return (
             <Row>
+            <ForceElement/>
                 <Col style={{ overflow: "auto" }}>
                     <div className="tramtronbetong" style={{ backgroundImage: `url(${img})`, position: 'relative' }}>
                         {this.getImage()}

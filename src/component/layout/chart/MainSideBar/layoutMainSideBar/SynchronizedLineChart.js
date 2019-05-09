@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Brush,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Brush,
   AreaChart, Area,
 } from 'recharts';
 
@@ -32,11 +32,12 @@ export default class Example extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/nskpgcrz/';
 
   render() {
+    console.log(this.props.width)
     return (
       <div>
         <h4>A demo of synchronized AreaCharts</h4>
         <LineChart
-          width={500}
+          width={900}
           height={200}
           data={data}
           syncId="anyId"
@@ -52,7 +53,7 @@ export default class Example extends PureComponent {
         </LineChart>
         <p>Maybe some other content</p>
         <LineChart
-          width={500}
+          width={900}
           height={200}
           data={data}
           syncId="anyId"
@@ -68,7 +69,7 @@ export default class Example extends PureComponent {
           <Brush />
         </LineChart>
         <AreaChart
-          width={500}
+          width={900}
           height={200}
           data={data}
           syncId="anyId"

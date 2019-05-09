@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import ReChartLine from '../ReChartLine';
 // import UsersOverview from '../UsersOverview';
-import { Col, Row, Container } from 'shards-react';
+import { Col } from 'shards-react';
 // import PageTitle from '../../../common/PageTitle'
 import SidebarMainNavbar from './SidebarMainNavbar'
 import SidebarNavItems from './SidebarNavItems'
@@ -15,7 +15,6 @@ export default class MainSideBar extends Component {
         md={{ size: 3 }}
       >
         <SidebarMainNavbar hideLogoText={this.props.hideLogoText} />
-        {/* <SidebarSearch /> */}
         <SidebarNavItems />
       </Col>
     )

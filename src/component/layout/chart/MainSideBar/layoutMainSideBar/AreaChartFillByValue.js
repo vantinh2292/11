@@ -45,12 +45,12 @@ const off = gradientOffset();
 
 export default class Example extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/64v6ocdx/';
-
   render() {
-    return (
+  console.log(this.props.width)
+  return (
       <AreaChart
-        width={500}
-        height={400}
+        width={900}
+        height={700}
         data={data}
         margin={{
           top: 10, right: 30, left: 0, bottom: 0,

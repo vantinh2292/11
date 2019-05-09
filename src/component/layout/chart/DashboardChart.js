@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Col, Row, Container } from 'shards-react';
+import { Col, Row, Container, Card, CardHeader, CardBody } from 'shards-react';
 import MainSideBar from './MainSideBar/MainSideBar'
 import { connect } from 'react-redux';
 import routeMainSideBar from './MainSideBar/data/routeMainSideBar'
 class DashboardChart extends Component {
     render() {
-    return (
+        return (
             <Container fluid>
                 <Row>
                     <MainSideBar />
@@ -16,10 +16,15 @@ class DashboardChart extends Component {
                         sm="12"
                         tag="main"
                     >
-                    {routeMainSideBar.map((item,key)=>(
-                            this.props.index===item.index?<item.layout key={key}></item.layout>:''
-                        ))
-                    }
+                        <Card className="mx-auto mt-5" style={{ maxWidth: "1000px" }}>
+                            <CardHeader>CHART DEMO</CardHeader>
+                            <CardBody >
+                                {routeMainSideBar.map((item, key) => (
+                                    this.props.index === item.index ? <item.layout key={key} width={item.with} height={item.height}></item.layout> : ''
+                                ))
+                                }
+                            </CardBody>
+                        </Card>
                     </Col>
                 </Row>
             </Container>
@@ -27,7 +32,7 @@ class DashboardChart extends Component {
     }
 }
 const mapStateToProps = (state, ownProps) => ({
-    index:state.navPageFull.index
+    index: state.navPageFull.index
 })
 
 export default connect(mapStateToProps)(DashboardChart);
