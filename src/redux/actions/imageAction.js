@@ -41,12 +41,10 @@ export const actionUpdateImage = (editImage) => {
             nameElement:editImage.nameElement
         }
         if (editImage.idImage !== '') {
-            dataSnapshot.child(editImage.idImage).update({
-                src: editImage.src,
-                left: editImage.left,
-                top: editImage.top,
-                nameElement:editImage.nameElement,
-            })
+            dataSnapshot.child(editImage.idImage).child('src').set(editImage.src);
+            dataSnapshot.child(editImage.idImage).child('left').set(editImage.left);
+            dataSnapshot.child(editImage.idImage).child('top').set(editImage.top);
+            dataSnapshot.child(editImage.idImage).child('nameElement').set(editImage.nameElement);
             dispatch({ type: 'UPDATE_IMAGE', Image })
         }
 

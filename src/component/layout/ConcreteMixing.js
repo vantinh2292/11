@@ -4,6 +4,7 @@ import { Col, Row } from 'shards-react';
 import { connect } from 'react-redux';
 import ImageFormEdit from './ImageFormEdit';
 import LabelFormEdit from './LabelFormEdit';
+import LineFormAddHorizontal from './LineFormAddHorizontal';
 import img from '../../images/PnlSynoptic_Tramtronbetong.png'
 import CSC_R from '../../images/CSC_R.gif'
 import CSC_S from '../../images/CSC_S.gif'
@@ -22,6 +23,7 @@ import BE2_S from '../../images/BE2_S.gif'
 import Image from './Image';
 import Label from './Label';
 import ForceElement from './ForceElement';
+import LineHorizontal from './LineHorizontal'
 import {backgroundClick} from '../../redux/actions/backgroundAction'
 class ConcreteMixing extends Component {
     constructor(props) {
@@ -154,6 +156,7 @@ class ConcreteMixing extends Component {
 
         return (
             <Row>
+            <LineHorizontal x={300} y={200} length={100}/>
             {this.props.indexClick>0?<ForceElement/>:''}
                 <Col style={{ overflow: "auto" }}>
                     <div onClick={this.props.backgroundClick} className="tramtronbetong" style={{ backgroundImage: `url(${img})`, position: 'relative' }}>
@@ -163,6 +166,7 @@ class ConcreteMixing extends Component {
                 </Col >
                 {this.props.editImage === true ? <ImageFormEdit /> : ''}
                 {this.props.editLabel === true ? <LabelFormEdit /> : ''}
+                {this.props.addLineHorizontal === true ? <LineFormAddHorizontal /> : ''}
             </Row>
         )
     };
@@ -171,6 +175,9 @@ class ConcreteMixing extends Component {
 const mapStateToProps = (state, ownProps) => ({
     editImage: state.auth.editImage,
     editLabel: state.auth.editLabel,
+    addLineHorizontal:state.auth.addLineHorizontal,
+    addLineVertical:state.auth.addLineVertical,
+    editLine:state.auth.editLine,
     indexClick:state.background.indexClick
 })
 const mapDispatchToProps = (dispatch, ownProps) => {

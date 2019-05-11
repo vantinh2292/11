@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { signOut } from '../../redux/actions/authAction'
 import { FormCheckbox } from "shards-react";
-import { toggleEditImage,toggleEditLabel } from '../../redux/actions/authAction'
+import { toggleEditImage,toggleEditLabel,actionToggleAddLineHorizontal,actionToggleAddLineVertical,actionToggleEditLine } from '../../redux/actions/authAction'
 
 class Link_User extends Component {
     render() {
@@ -41,6 +41,30 @@ class Link_User extends Component {
                                     Edit Label
                                 </FormCheckbox>:''
                         }
+                        {
+                            this.props.idUser === 'S5sPGpvaNuWQXms4iPH8VXo3pu93'?
+                                <FormCheckbox toggle small inline
+                                    checked={this.props.checkedAddLineHorizontal}
+                                    onChange={() => this.props.actionToggleAddLineHorizontal()}>
+                                    Add Line Horizontal
+                                </FormCheckbox>:''
+                        }
+                        {
+                            this.props.idUser === 'S5sPGpvaNuWQXms4iPH8VXo3pu93'?
+                                <FormCheckbox toggle small inline
+                                    checked={this.props.checkedAddLineVertical}
+                                    onChange={() => this.props.actionToggleAddLineVertical()}>
+                                    Add Line Vertical
+                                </FormCheckbox>:''
+                        }
+                        {
+                            this.props.idUser === 'S5sPGpvaNuWQXms4iPH8VXo3pu93'?
+                                <FormCheckbox toggle small inline
+                                    checked={this.props.checkedEditLine}
+                                    onChange={() => this.props.actionToggleEditLine()}>
+                                    Edit Line
+                                </FormCheckbox>:''
+                        }
 
                     </div>
                 </div>
@@ -53,7 +77,10 @@ const mapStateToProps = (state, ownProps) => {
         nameUser: state.firebase.auth.displayName,
         idUser: state.firebase.auth.uid,
         checkedEditImage: state.auth.editImage,
-        checkedEditLabel: state.auth.editLabel
+        checkedEditLabel: state.auth.editLabel,
+        checkedAddLineHorizontal:state.auth.addLineHorizontal,
+        checkedAddLineVertical:state.auth.addLineVertical,
+        checkedEditLine:state.auth.editLine,
     }
 }
 
@@ -68,6 +95,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         toggleEditLabel: () => {
             dispatch(toggleEditLabel())
+        },
+        actionToggleAddLineHorizontal: () => {
+            dispatch(actionToggleAddLineHorizontal())
+        },
+        actionToggleAddLineVertical: () => {
+            dispatch(actionToggleAddLineVertical())
+        },
+        actionToggleEditLine: () => {
+            dispatch(actionToggleEditLine())
         },
         
         

@@ -68,3 +68,24 @@ export const toggleEditLabel=()=>{
         }
     }
 }
+export const actionToggleAddLineHorizontal=()=>{
+    return(dispatch,getState)=>{
+        if(getState().firebase.auth.uid==='S5sPGpvaNuWQXms4iPH8VXo3pu93'){
+            dispatch({type:'TOGGLE_ADD_LINE_HORIZONTAL'})
+        }
+    }
+}
+export const actionToggleAddLineVertical=()=>{
+    return(dispatch,getState)=>{
+        if(getState().firebase.auth.uid==='S5sPGpvaNuWQXms4iPH8VXo3pu93'){
+            dispatch({type:'TOGGLE_ADD_LINE_VERTICAL'})
+        }
+    }
+}
+export const actionToggleEditLine=()=>{
+    return(dispatch,getState)=>{
+        if(getState().firebase.auth.uid==='S5sPGpvaNuWQXms4iPH8VXo3pu93'){
+            dispatch({type:'TOGGLE_EDIT_LINE'})
+        }
+    }
+}
