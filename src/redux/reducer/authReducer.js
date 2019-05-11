@@ -4,6 +4,7 @@ const initState = {
     editLabel: false,
     addLineHorizontal: false,
     addLineVertical: false,
+    addLine:false,
     editLine: false
 }
 export const authReducer = (state = initState, action) => {
@@ -90,6 +91,16 @@ export const authReducer = (state = initState, action) => {
             return {
                 ...state,
                 addLineVertical: !state.addLineVertical,
+                addLineHorizontal: false,
+                editLine: false,
+                editImage: false,
+                editLabel: false,
+            };
+        case 'TOGGLE_ADD_LINE':
+            console.log('TOGGLE ADD LINE');
+            return {
+                ...state,
+                addLine: !state.addLine,
                 addLineHorizontal: false,
                 editLine: false,
                 editImage: false,

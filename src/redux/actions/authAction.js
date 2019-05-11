@@ -82,6 +82,13 @@ export const actionToggleAddLineVertical=()=>{
         }
     }
 }
+export const actionToggleAddLine=()=>{
+    return(dispatch,getState)=>{
+        if(getState().firebase.auth.uid==='S5sPGpvaNuWQXms4iPH8VXo3pu93'){
+            dispatch({type:'TOGGLE_ADD_LINE'})
+        }
+    }
+}
 export const actionToggleEditLine=()=>{
     return(dispatch,getState)=>{
         if(getState().firebase.auth.uid==='S5sPGpvaNuWQXms4iPH8VXo3pu93'){

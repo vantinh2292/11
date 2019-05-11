@@ -2,16 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Col } from 'shards-react';
 import {
-  actionAddLineHorizontal,
-  actionLineAddLeftChange, actionLineAddTopChange, actionLineAddLengthChange,
+  actionAddLine,
+  actionLineAddLeftChange, actionLineAddTopChange, actionLineAddLengthChange,actionLineAddTypeChange,
   actionMoveLeftDecrease, actionMoveLeftIncrease,
   actionMoveTopDecrease, actionMoveTopIncrease,
   actionLengthDecrease, actionLengthIncrease
 } from '../../redux/actions/lineAction'
-class LineFormAddHorizontal extends Component {
+class LineFormAdd extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.actionAddLineHorizontal();
+    this.props.actionAddLine();
+  };
+  handleChangeType = (e) => {
+    e.preventDefault();
+    this.props.actionLineAddTypeChange(e.target.value);
   };
   handleChangeLength = (e) => {
     e.preventDefault();
@@ -27,7 +31,7 @@ class LineFormAddHorizontal extends Component {
   };
   handleKeyUp=(event)=>{
     if (event.keyCode === 13) {
-      this.props.actionAddLineHorizontal();
+      this.props.actionAddLine();
     }
   }
   handleKeyPress = (event) => {
@@ -68,6 +72,10 @@ class LineFormAddHorizontal extends Component {
             <label htmlFor="top" className="text-info">Top:</label><br />
             <input type="text" onChange={this.handleChangeTop} onKeyDown={this.handleKeyPress} placeholder="Top *" id="top" className="form-control" value={this.props.LineTop} />
           </div>
+          <div className="form-group">
+            <label htmlFor="nameImage" className="text-info">TYPE (H_V):</label><br />
+            <input type="text" onChange={this.handleChangeType} onKeyDown={this.handleKeyPress} placeholder="Line H_V*" id="type" className="form-control" value={this.props.LineType} />
+          </div>
 
           <div className="form-group" style={{ width: '100%' }}>
             <input style={{ width: '100%' }} type="submit" name="submit" className="btn btn-info btn-md" value="Add Data" />
@@ -81,19 +89,23 @@ const mapStateToProps = (state, ownProps) => {
   return {
     LineLeft: state.line.addLine[0].addLineLeft,
     LineTop: state.line.addLine[0].addLineTop,
-    LineLength: state.line.addLine[0].addLineLength
+    LineLength: state.line.addLine[0].addLineLength,
+    LineType:state.line.addLine[0].addLineType
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    actionAddLineHorizontal: (newImage) => {
-      dispatch(actionAddLineHorizontal(newImage))
+    actionAddLine: () => {
+      dispatch(actionAddLine())
     },
     actionLineAddLeftChange: (left) => {
       dispatch(actionLineAddLeftChange(left))
     },
     actionLineAddTopChange: (top) => {
       dispatch(actionLineAddTopChange(top))
+    },
+    actionLineAddTypeChange: (type) => {
+      dispatch(actionLineAddTypeChange(type))
     },
     actionLineAddLengthChange: (length) => {
       dispatch(actionLineAddLengthChange(length))
@@ -118,4 +130,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(LineFormAddHorizontal)
+export default connect(mapStateToProps, mapDispatchToProps)(LineFormAdd)

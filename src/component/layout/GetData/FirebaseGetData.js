@@ -3,6 +3,7 @@ export function GetImage(cb) {
     let datasnapshot = firebaseConnection.database().ref('Table1/Image');
     datasnapshot.on('value', (images) => {
         let arrData = [];
+        let arrDataRun=[]
         images.forEach(element => {
             const key = element.key;
             const src = element.val().src;
@@ -18,8 +19,14 @@ export function GetImage(cb) {
                 nameElement: nameElement,
                 stateElement: stateElement
             });
+            if (stateElement){
+                arrDataRun.push({
+                    key: key,
+                    nameElement: nameElement,
+                });
+            }
         });
-        cb(arrData);
+        cb(arrData,arrDataRun);
     })
 
 }
@@ -42,12 +49,14 @@ export function GetLabel(cb) {
         cb(arrData);
     })
 }
-export function GetLineHorizontal(cb){
-    let datasnapshot = firebaseConnection.database().ref('Table1/LineHorizontal');
+export function GetLineData(cb){
+    let datasnapshot = firebaseConnection.database().ref('Table1/Line');
     datasnapshot.on('value', (labels) => {
         let arrData = [];
         labels.forEach(element => {
             const key = element.key;
+            const idRun=element.val().idRun;
+            const type=element.val().type
             const length = element.val().length;
             const left = element.val().left;
             const top = element.val().top;
@@ -55,7 +64,9 @@ export function GetLineHorizontal(cb){
                 key: key,
                 length: length,
                 left: left,
-                top: top
+                top: top,
+                idRun:idRun,
+                type:type
             });
         });
         cb(arrData);

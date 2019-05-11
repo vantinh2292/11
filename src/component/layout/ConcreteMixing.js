@@ -3,7 +3,6 @@ import { Col, Row } from 'shards-react';
 import { connect } from 'react-redux';
 import ImageFormEdit from './ImageFormEdit';
 import LabelFormEdit from './LabelFormEdit';
-import LineFormAddHorizontal from './LineFormAddHorizontal';
 import img from '../../images/PnlSynoptic_Tramtronbetong.png'
 import CSC_R from '../../images/CSC_R.gif'
 import CSC_S from '../../images/CSC_S.gif'
@@ -21,24 +20,28 @@ import BE2_R from '../../images/BE2_R.gif'
 import BE2_S from '../../images/BE2_S.gif'
 import Image from './Image';
 import Label from './Label';
-import LineHorizontal from './LineHorizontal';
+import Line from './Line';
 import ForceElement from './ForceElement';
 import { backgroundClick } from '../../redux/actions/backgroundAction'
-import LineHorizontalAdd from './LineHorizontalAdd';
-import { GetImage, GetLabel, GetLineHorizontal } from './GetData/FirebaseGetData';
+import LineAdd from './LineAdd';
+import LineFormAdd from './LineFormAdd'
+import { GetImage, GetLabel, GetLineData } from './GetData/FirebaseGetData';
+import LineFormEdit from './LineFormEdit';
 class ConcreteMixing extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            elementRUN: [],
             dataFirebaseImage: [],
             dataFirebaseLabel: [],
-            dataFirebaseLineHorizontal: [],
+            dataFirebaseLine: [],
         }
     }
     componentWillMount() {
-        GetImage((result) => {
+        GetImage((result, resultRun) => {
             this.setState({
-                dataFirebaseImage: result
+                dataFirebaseImage: result,
+                elementRUN: resultRun
             })
         });
         GetLabel((result) => {
@@ -46,25 +49,48 @@ class ConcreteMixing extends Component {
                 dataFirebaseLabel: result
             })
         })
-        GetLineHorizontal((result) => {
+        GetLineData((result) => {
             this.setState({
-                dataFirebaseLineHorizontal: result
+                dataFirebaseLine: result
             })
         })
     }
     getLine = () => {
-        if (this.state.dataFirebaseLineHorizontal.length > 0) {
-            return this.state.dataFirebaseLineHorizontal.map((value, key) => {
-                return (
-                    <LineHorizontal
-                        key={key}
-                        length={value.length}
-                        left={value.left}
-                        top={value.top}
-                    />
-                )
-            }
-            )
+        if (this.state.dataFirebaseLine.length > 0) {
+            return this.state.dataFirebaseLine.map((value, key) => {
+                if (value.idRun && value.idRun && !this.props.editLine) {
+                    let arrRun = value.idRun.split('_');
+                    return (arrRun.map((element, key) => {
+                        let ElementRun = this.state.elementRUN.find(x => x.nameElement === element)
+                        if (ElementRun) {
+                            return (
+                                <Line
+                                    key={key}
+                                    i={value.key}
+                                    type={value.type}
+                                    idRun={value.idRun}
+                                    length={value.length}
+                                    left={value.left}
+                                    top={value.top}
+                                />
+                            )
+                        }
+                    }))
+                } else {
+                    if (this.props.editLine)
+                        return (
+                            <Line
+                                key={key}
+                                i={value.key}
+                                type={value.type}
+                                idRun={value.idRun}
+                                length={value.length}
+                                left={value.left}
+                                top={value.top}
+                            />
+                        )
+                }
+            })
         }
     }
     getImage = () => {
@@ -126,6 +152,8 @@ class ConcreteMixing extends Component {
             })
         }
     }
+
+
     getLabel = () => {
         if (this.state.dataFirebaseLabel.length > 0) {
             return this.state.dataFirebaseLabel.map((value, key) => {
@@ -144,8 +172,9 @@ class ConcreteMixing extends Component {
         if (this.props.storeAddLine.length > 0) {
             return this.props.storeAddLine.map((value, key) => {
                 return (
-                    <LineHorizontalAdd
+                    <LineAdd
                         key={key}
+                        type={value.addLineType}
                         lineLeft={value.addLineLeft}
                         lineTop={value.addLineTop}
                         lineLength={value.addLineLength}
@@ -154,7 +183,6 @@ class ConcreteMixing extends Component {
             })
         }
     }
-
     render() {
         return (
             <Row>
@@ -164,12 +192,13 @@ class ConcreteMixing extends Component {
                         {this.getImage()}
                         {this.getLabel()}
                         {this.getLine()}
-                        {this.props.addLineHorizontal === true ? this.getLineAdd() : ''}
+                        {this.props.addLine === true ? this.getLineAdd() : ''}
                     </div>
                 </Col >
                 {this.props.editImage === true ? <ImageFormEdit /> : ''}
                 {this.props.editLabel === true ? <LabelFormEdit /> : ''}
-                {this.props.addLineHorizontal === true ? <LineFormAddHorizontal /> : ''}
+                {this.props.addLine === true ? <LineFormAdd /> : ''}
+                {this.props.editLine === true ? <LineFormEdit /> : ''}
             </Row>
         )
     };
@@ -178,8 +207,7 @@ class ConcreteMixing extends Component {
 const mapStateToProps = (state, ownProps) => ({
     editImage: state.auth.editImage,
     editLabel: state.auth.editLabel,
-    addLineHorizontal: state.auth.addLineHorizontal,
-    addLineVertical: state.auth.addLineVertical,
+    addLine: state.auth.addLine,
     editLine: state.auth.editLine,
     indexClick: state.background.indexClick,
     storeAddLine: state.line.addLine

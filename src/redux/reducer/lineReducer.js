@@ -1,14 +1,36 @@
 const initState = {
+    editLine: {
+        editLeft: '',
+        editTop: '',
+        editLength: '',
+        idLine: '',
+        idRun: '',
+        type:''
+    },
     addLine: [
         {
             addLineLeft: 100,
             addLineTop: 100,
-            addLineLength: 100
+            addLineLength: 100,
+            addLineType:'H'
         }
     ]
 }
 export const lineReducer = (state = initState, action) => {
     switch (action.type) {
+        case 'CHANGE_ADD_LINE_TYPE':
+            return {
+                ...state,
+                addLine: state.addLine.map((item, index) => {
+                    if (index === 0) {
+                        return {
+                            ...item,
+                            addLineType: action.type_edit
+                        }
+                    }
+                    return item
+                })
+            }
         case 'CHANGE_ADD_LINE_LEFT':
             return {
                 ...state,
@@ -22,7 +44,6 @@ export const lineReducer = (state = initState, action) => {
                     return item
                 })
             }
-
         case 'CHANGE_ADD_LINE_TOP':
             return {
                 ...state,
@@ -126,6 +147,18 @@ export const lineReducer = (state = initState, action) => {
                     }
                     return item
                 })
+            }
+        case 'CLICK_LINE':
+            return {
+                ...state,
+                editLine: {
+                    editLeft: action.item.left,
+                    editTop: action.item.top,
+                    editLength: action.item.length,
+                    idLine: action.item.i,
+                    idRun: action.item.idRun,
+                    type:action.item.type
+                }
             }
 
         default:

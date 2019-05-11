@@ -9,7 +9,7 @@ class ForceElement extends Component {
             position:'absolute',
             top: modifiTop,
             left:parseInt(this.props.left),
-            zIndex: 1, 
+            zIndex: 10, 
             width: 250
         };
         return (

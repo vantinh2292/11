@@ -1,17 +1,25 @@
 import {firebaseConnection} from "../../firebase";
-var dataSnapshot = firebaseConnection.database().ref('Table1/LineHorizontal');
-export const actionAddLineHorizontal = (newItem) => {
+
+export const actionAddLine = () => {
+    let dataSnapshot = firebaseConnection.database().ref('Table1/Line');
     return (dispatch,getState) => {
-        const {addLineHorizontal,addLineVertical} = getState().auth;
-        const {addLineLeft,addLineTop,addLineLength} =getState().line.addLine[0];
-        if (!addLineVertical && addLineHorizontal) {
+        const {addLine} = getState().auth;
+        const {addLineLeft,addLineTop,addLineLength,addLineType} =getState().line.addLine[0];
+        if (addLine) {
             let temp = {
                 left: addLineLeft,
                 top:addLineTop,
-                length:addLineLength
+                length:addLineLength,
+                type:addLineType
             }
             dataSnapshot.push(temp);
         }
+    }
+}
+
+export const actionLineAddTypeChange=(type_edit)=>{
+    return (dispatch)=>{
+        dispatch({type:'CHANGE_ADD_LINE_TYPE',type_edit})
     }
 }
 export const actionLineAddLeftChange=(left)=>{
@@ -57,5 +65,24 @@ export const actionLengthIncrease=()=>{
 export const actionLengthDecrease=()=>{
     return (dispatch)=>{
         dispatch({type:'MOVE_LENGTH_DECREASE',})
+    }
+}
+export const actionClickLine=(item)=>{
+    return(dispatch)=>{
+        dispatch({type:'CLICK_LINE',item})
+    }
+}
+export const actionEditLine=(item)=>{
+    let dataSnapshot = firebaseConnection.database().ref('Table1/Line');
+    return(dispatch)=>{
+        if(item.idLine!==''){
+            dataSnapshot.child(item.idLine).update({
+                length:item.length,
+                left:item.left,
+                top:item.top,
+                idRun:item.idRun,
+                type:item.type
+            })
+        }
     }
 }

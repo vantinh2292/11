@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {actionClickLine} from '../../redux/actions/lineAction'
-class LineHorizontal extends Component {
+class LineVertical extends Component {
   render() {
     const { left, top, length,i,idRun } = this.props;
     const width = 2;
@@ -9,12 +9,13 @@ class LineHorizontal extends Component {
       position: "absolute",
       left,
       top,
-      width: length,
-      height: width,
+      width: width,
+      height: length,
       zIndex: 1,
       backgroundColor:'limegreen'
     }
     return (
+      // <div onClick={()=>actionClickLine({left,top,length,i,idRun})} style={LineStyle}>
       <div onClick={()=>this.props.actionClickLine({left,top,length,i,idRun})} style={LineStyle}>
       </div>
 
@@ -29,4 +30,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
   }
 }
-export default connect(null,mapDispatchToProps)(LineHorizontal)
+
+export default connect(null,mapDispatchToProps)(LineVertical)

@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Col } from 'shards-react';
 import {
-  actionAddLineHorizontal,
+  actionAddLineVertical,
   actionLineAddLeftChange, actionLineAddTopChange, actionLineAddLengthChange,
   actionMoveLeftDecrease, actionMoveLeftIncrease,
   actionMoveTopDecrease, actionMoveTopIncrease,
   actionLengthDecrease, actionLengthIncrease
 } from '../../redux/actions/lineAction'
-class LineFormAddHorizontal extends Component {
+class LineFormAddVertical extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.actionAddLineHorizontal();
+    this.props.actionAddLineVertical();
   };
   handleChangeLength = (e) => {
     e.preventDefault();
@@ -27,11 +27,10 @@ class LineFormAddHorizontal extends Component {
   };
   handleKeyUp=(event)=>{
     if (event.keyCode === 13) {
-      this.props.actionAddLineHorizontal();
+      this.props.actionAddLineVertical();
     }
   }
   handleKeyPress = (event) => {
-    
     if (event.shiftKey ) {//shift
       this.props.actionLengthIncrease()
     }
@@ -86,8 +85,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    actionAddLineHorizontal: (newImage) => {
-      dispatch(actionAddLineHorizontal(newImage))
+    actionAddLineVertical: (newImage) => {
+      dispatch(actionAddLineVertical(newImage))
     },
     actionLineAddLeftChange: (left) => {
       dispatch(actionLineAddLeftChange(left))
@@ -118,4 +117,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(LineFormAddHorizontal)
+export default connect(mapStateToProps, mapDispatchToProps)(LineFormAddVertical)

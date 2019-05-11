@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { signOut } from '../../redux/actions/authAction'
 import { FormCheckbox } from "shards-react";
-import { toggleEditImage,toggleEditLabel,actionToggleAddLineHorizontal,actionToggleAddLineVertical,actionToggleEditLine } from '../../redux/actions/authAction'
+import { toggleEditImage,toggleEditLabel,actionToggleAddLine,actionToggleEditLine } from '../../redux/actions/authAction'
 
 class Link_User extends Component {
     render() {
@@ -44,17 +44,9 @@ class Link_User extends Component {
                         {
                             this.props.idUser === 'S5sPGpvaNuWQXms4iPH8VXo3pu93'?
                                 <FormCheckbox toggle small inline
-                                    checked={this.props.checkedAddLineHorizontal}
-                                    onChange={() => this.props.actionToggleAddLineHorizontal()}>
-                                    Add Line Horizontal
-                                </FormCheckbox>:''
-                        }
-                        {
-                            this.props.idUser === 'S5sPGpvaNuWQXms4iPH8VXo3pu93'?
-                                <FormCheckbox toggle small inline
-                                    checked={this.props.checkedAddLineVertical}
-                                    onChange={() => this.props.actionToggleAddLineVertical()}>
-                                    Add Line Vertical
+                                    checked={this.props.checkedAddLine}
+                                    onChange={() => this.props.actionToggleAddLine()}>
+                                    Add Line
                                 </FormCheckbox>:''
                         }
                         {
@@ -78,8 +70,7 @@ const mapStateToProps = (state, ownProps) => {
         idUser: state.firebase.auth.uid,
         checkedEditImage: state.auth.editImage,
         checkedEditLabel: state.auth.editLabel,
-        checkedAddLineHorizontal:state.auth.addLineHorizontal,
-        checkedAddLineVertical:state.auth.addLineVertical,
+        checkedAddLine:state.auth.addLine,
         checkedEditLine:state.auth.editLine,
     }
 }
@@ -96,11 +87,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         toggleEditLabel: () => {
             dispatch(toggleEditLabel())
         },
-        actionToggleAddLineHorizontal: () => {
-            dispatch(actionToggleAddLineHorizontal())
-        },
-        actionToggleAddLineVertical: () => {
-            dispatch(actionToggleAddLineVertical())
+        actionToggleAddLine: () => {
+            dispatch(actionToggleAddLine())
         },
         actionToggleEditLine: () => {
             dispatch(actionToggleEditLine())

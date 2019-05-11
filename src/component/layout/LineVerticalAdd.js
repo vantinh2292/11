@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
-class LineHorizontalAdd extends Component {
-  
+class LineVerticalAdd extends Component {
   render() {
-
     const { lineLeft, lineTop, lineLength } = this.props;
     const width = 2;
     var LineStyle = {
       position: "absolute",
       left: parseInt(lineLeft),
       top: parseInt(lineTop),
-      width: lineLength,
-      height: width,
+      width: width,
+      height: lineLength,
       zIndex: 1,
       backgroundColor:'limegreen'
     }
@@ -20,5 +18,4 @@ class LineHorizontalAdd extends Component {
     )
   }
 }
-
-export default (LineHorizontalAdd)
+export default (LineVerticalAdd)
