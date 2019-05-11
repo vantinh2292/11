@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { firebaseConnection } from '../../firebase';
 import { Col, Row } from 'shards-react';
 import { connect } from 'react-redux';
 import ImageFormEdit from './ImageFormEdit';
@@ -22,62 +21,51 @@ import BE2_R from '../../images/BE2_R.gif'
 import BE2_S from '../../images/BE2_S.gif'
 import Image from './Image';
 import Label from './Label';
+import LineHorizontal from './LineHorizontal';
 import ForceElement from './ForceElement';
-import LineHorizontal from './LineHorizontal'
-import {backgroundClick} from '../../redux/actions/backgroundAction'
+import { backgroundClick } from '../../redux/actions/backgroundAction'
+import LineHorizontalAdd from './LineHorizontalAdd';
+import { GetImage, GetLabel, GetLineHorizontal } from './GetData/FirebaseGetData';
 class ConcreteMixing extends Component {
     constructor(props) {
         super(props)
         this.state = {
             dataFirebaseImage: [],
             dataFirebaseLabel: [],
+            dataFirebaseLineHorizontal: [],
         }
     }
     componentWillMount() {
-        var datasnapshot = firebaseConnection.database().ref('Table1/Image');
-        // var datasnapshot = firebaseConnection.database().ref('Table1/Note').orderByChild('metrics/views');
-        datasnapshot.on('value', (images) => {
-            let arrData = [];
-            images.forEach(element => {
-                const key = element.key;
-                const src = element.val().src;
-                const left = element.val().left;
-                const top = element.val().top;
-                const nameElement = element.val().nameElement;
-                const stateElement=element.val().state;
-                arrData.push({
-                    key: key,
-                    src: src,
-                    left: left,
-                    top: top,
-                    nameElement: nameElement,
-                    stateElement:stateElement
-                });
-            });
+        GetImage((result) => {
             this.setState({
-                dataFirebaseImage: arrData
+                dataFirebaseImage: result
+            })
+        });
+        GetLabel((result) => {
+            this.setState({
+                dataFirebaseLabel: result
             })
         })
-        //connect label
-        datasnapshot = firebaseConnection.database().ref('Table1/Label');
-        datasnapshot.on('value', (labels) => {
-            let arrData = [];
-            labels.forEach(element => {
-                const key = element.key;
-                const text = element.val().text;
-                const left = element.val().left;
-                const top = element.val().top;
-                arrData.push({
-                    key: key,
-                    text: text,
-                    left: left,
-                    top: top
-                });
-            });
+        GetLineHorizontal((result) => {
             this.setState({
-                dataFirebaseLabel: arrData
+                dataFirebaseLineHorizontal: result
             })
         })
+    }
+    getLine = () => {
+        if (this.state.dataFirebaseLineHorizontal.length > 0) {
+            return this.state.dataFirebaseLineHorizontal.map((value, key) => {
+                return (
+                    <LineHorizontal
+                        key={key}
+                        length={value.length}
+                        left={value.left}
+                        top={value.top}
+                    />
+                )
+            }
+            )
+        }
     }
     getImage = () => {
         const arrImage = [
@@ -119,10 +107,10 @@ class ConcreteMixing extends Component {
         ];
         if (this.state.dataFirebaseImage.length > 0) {
             return this.state.dataFirebaseImage.map((value, key) => {
-                const imageView=arrImage.find(x => x.name === value.src)
-                var src='';
-                if(value.stateElement===1)src=imageView.src_R;
-                if(value.stateElement===0)src=imageView.src_S;
+                const imageView = arrImage.find(x => x.name === value.src)
+                var src = '';
+                if (value.stateElement === 1) src = imageView.src_R;
+                if (value.stateElement === 0) src = imageView.src_S;
                 return (
                     <Image
                         key={key}
@@ -152,16 +140,31 @@ class ConcreteMixing extends Component {
             })
         }
     }
-    render() {
+    getLineAdd = () => {
+        if (this.props.storeAddLine.length > 0) {
+            return this.props.storeAddLine.map((value, key) => {
+                return (
+                    <LineHorizontalAdd
+                        key={key}
+                        lineLeft={value.addLineLeft}
+                        lineTop={value.addLineTop}
+                        lineLength={value.addLineLength}
+                    />
+                )
+            })
+        }
+    }
 
+    render() {
         return (
             <Row>
-            <LineHorizontal x={300} y={200} length={100}/>
-            {this.props.indexClick>0?<ForceElement/>:''}
+                {this.props.indexClick > 0 ? <ForceElement /> : ''}
                 <Col style={{ overflow: "auto" }}>
                     <div onClick={this.props.backgroundClick} className="tramtronbetong" style={{ backgroundImage: `url(${img})`, position: 'relative' }}>
                         {this.getImage()}
                         {this.getLabel()}
+                        {this.getLine()}
+                        {this.props.addLineHorizontal === true ? this.getLineAdd() : ''}
                     </div>
                 </Col >
                 {this.props.editImage === true ? <ImageFormEdit /> : ''}
@@ -175,10 +178,11 @@ class ConcreteMixing extends Component {
 const mapStateToProps = (state, ownProps) => ({
     editImage: state.auth.editImage,
     editLabel: state.auth.editLabel,
-    addLineHorizontal:state.auth.addLineHorizontal,
-    addLineVertical:state.auth.addLineVertical,
-    editLine:state.auth.editLine,
-    indexClick:state.background.indexClick
+    addLineHorizontal: state.auth.addLineHorizontal,
+    addLineVertical: state.auth.addLineVertical,
+    editLine: state.auth.editLine,
+    indexClick: state.background.indexClick,
+    storeAddLine: state.line.addLine
 })
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
@@ -188,4 +192,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ConcreteMixing);
+export default connect(mapStateToProps, mapDispatchToProps)(ConcreteMixing);
