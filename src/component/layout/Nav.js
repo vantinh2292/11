@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import LinkSigneInSignOut from './LinkSigneInSignOut'
-import LinkUser from './LinkUser'
-import LinkScada from './LinkScada';
+import LinkSigneInSignOut from './link/LinkSigneInSignOut'
+import LinkUser from './link/LinkUser'
+import LinkScada from './link/LinkScada';
 class Nav extends Component {
     render() {
         const { UID } = this.props;

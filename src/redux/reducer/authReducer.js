@@ -2,8 +2,6 @@ const initState = {
     authError: null,
     editImage: false,
     editLabel: false,
-    addLineHorizontal: false,
-    addLineVertical: false,
     addLine:false,
     editLine: false
 }
@@ -62,8 +60,7 @@ export const authReducer = (state = initState, action) => {
                 editImage: !state.editImage,
                 editLabel: false,
                 editLine: false,
-                addLineHorizontal: false,
-                addLineVertical: false,
+                addLine: false,
             };
         case 'TOGGLE_EDIT_LABEL':
             console.log('TOGGLE EDIT LABEL');
@@ -73,35 +70,12 @@ export const authReducer = (state = initState, action) => {
                 editImage: false,
                 addLine: false,
                 editLine: false,
-                addLineHorizontal: false,
-                addLineVertical: false,
-            };
-        case 'TOGGLE_ADD_LINE_HORIZONTAL':
-            console.log('TOGGLE ADD LINE HORIZONTAL');
-            return {
-                ...state,
-                addLineHorizontal: !state.addLineHorizontal,
-                addLineVertical: false,
-                editLine: false,
-                editImage: false,
-                editLabel: false,
-            };
-        case 'TOGGLE_ADD_LINE_VERTICAL':
-            console.log('TOGGLE ADD LINE VERTICAL');
-            return {
-                ...state,
-                addLineVertical: !state.addLineVertical,
-                addLineHorizontal: false,
-                editLine: false,
-                editImage: false,
-                editLabel: false,
             };
         case 'TOGGLE_ADD_LINE':
             console.log('TOGGLE ADD LINE');
             return {
                 ...state,
                 addLine: !state.addLine,
-                addLineHorizontal: false,
                 editLine: false,
                 editImage: false,
                 editLabel: false,
@@ -111,8 +85,7 @@ export const authReducer = (state = initState, action) => {
             return {
                 ...state,
                 editLine: !state.editLine,
-                addLineHorizontal:false,
-                addLineVertical: false,
+                addLine:false,
                 editImage: false,
                 editLabel: false,
             };

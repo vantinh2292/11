@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import {actionForceRunClick} from '../../redux/actions/forceElementAction'
-import {actionForceStopClick} from '../../redux/actions/forceElementAction'
+import {actionForceRunClick,actionForceStopClick,actionForceAutoClick} from '../../redux/actions/forceElementAction'
 class ForceElement extends Component {
     render() {
         const modifiTop=parseInt(this.props.top)>50?parseInt(this.props.top)-30:parseInt(this.props.top)+150;
@@ -18,7 +17,7 @@ class ForceElement extends Component {
                 </div>
                 <div className="btn-group" style={{ width: 250 }}>
                     <button onClick={this.props.actionForceRunClick} type="button" style={{ width: 70, fontSize: 18 }} className="btn btn-primary">RUN</button>
-                    <button type="button" style={{ width: 70, fontSize: 18 }} className="btn btn-success">AUTO</button>
+                    <button onClick={this.props.actionForceAutoClick} type="button" style={{ width: 70, fontSize: 18 }} className="btn btn-success">AUTO</button>
                     <button onClick={this.props.actionForceStopClick} type="button" style={{ width: 70, fontSize: 18 }} className="btn btn-danger">STOP</button>
                 </div>
             </div>
@@ -39,6 +38,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         actionForceStopClick: () => {
             dispatch(actionForceStopClick())
+        },
+        actionForceAutoClick: () => {
+            dispatch(actionForceAutoClick())
         }
     }
 }
