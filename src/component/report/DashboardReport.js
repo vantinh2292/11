@@ -23,15 +23,11 @@ class DashboardReport extends Component {
                         sm="12"
                         tag="main"
                     >
-                        <Card className="mx-auto mt-5" style={{ maxWidth: "1000px" }}>
-                            <CardHeader>CHART DEMO</CardHeader>
-                            <CardBody >
-                                {routeMainSideBar.map((item, key) => (
+                    {routeMainSideBar.map((item, key) => (
                                     this.props.index === item.index ? <item.layout key={key} width={item.with} height={item.height}></item.layout> : ''
                                 ))
                                 }
-                            </CardBody>
-                        </Card>
+                       
                     </Col>
                 </Row>
             </Container>
