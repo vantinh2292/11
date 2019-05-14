@@ -27,7 +27,6 @@ import LineAdd from '../layout/line/LineAdd';
 import LineFormAdd from '../layout/line/LineFormAdd'
 import { GetImage, GetLabel, GetLineData } from '../layout/GetData/FirebaseGetData';
 import LineFormEdit from '../layout/line/LineFormEdit';
-import {testfirebase} from '../../redux/actions/imageAction'
 class ConcreteMixing extends Component {
     constructor(props) {
         super(props)
@@ -184,11 +183,6 @@ class ConcreteMixing extends Component {
             })
         }
     }
-    testfirebase1=()=>{
-        testfirebase((result)=>{
-            console.log(result)
-        })
-    }
     render() {
         return (
             <Row>
@@ -198,7 +192,6 @@ class ConcreteMixing extends Component {
                         {this.getImage()}
                         {this.getLabel()}
                         {this.getLine()}
-                        <button onClick={this.testfirebase1}/>
                         {this.props.addLine === true ? this.getLineAdd() : ''}
                     </div>
                 </Col >
@@ -224,9 +217,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         backgroundClick: () => {
             dispatch(backgroundClick())
         },
-        testfirebase: (cb) => {
-            dispatch(testfirebase(cb))
-        }
     }
 }
 

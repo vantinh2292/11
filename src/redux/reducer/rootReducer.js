@@ -9,6 +9,7 @@ import { chartReducer } from './chartReducer';
 import { navReducer } from './navReducer';
 import {lineReducer} from './lineReducer'
 import {backgroundReducer} from './backgroundReducer'
+import {searchTimeReducer} from './searchTimeReducer'
 const rootReducer=combineReducers({
     auth:authReducer,
     note:noteReducer,
@@ -19,6 +20,7 @@ const rootReducer=combineReducers({
     navPageFull:navReducer,
     firestore:firestoreReducer,
     firebase:firebaseReducer,
-    chartData:chartReducer
+    chartData:chartReducer,
+    searchTime:searchTimeReducer,
 });
 export default rootReducer;

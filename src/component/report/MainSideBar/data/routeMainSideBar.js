@@ -1,11 +1,10 @@
 // Layout Types
-import EnhancedTable from "../layoutMainSideBar/EnhancedTable";
-import SearchTime from '../SearchTime'
+import DashboardTable from '../layoutMainSideBar/DashboardTable'
 export default [
   {
-    layout: SearchTime,
+    layout: DashboardTable,
     index: 1,
-    title: "EnhancedTable",
+    title: "DashboardTable",
     width:900,
     height:700
   },

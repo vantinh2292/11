@@ -20,13 +20,15 @@ class MaterialUIPickers extends React.Component {
   };
 
   handleDateChange = date => {
-    this.setState({ selectedDate: date });
+    this.setState({ selectedDate: date.getTime() });
+    this.props.onGetTime(date);
   };
-
+  componentDidMount(){
+    this.props.onGetTime(this.state.selectedDate)
+  }
   render() {
     const { classes } = this.props;
     const { selectedDate } = this.state;
-    console.log(selectedDate);
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Grid container className={classes.grid} justify="center">

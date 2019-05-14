@@ -72,9 +72,9 @@ export function GetLineData(cb){
         cb(arrData);
     })
 }
-export function GetUserActive(cb){
+export function GetUserActive(timeStart,timeEnd,cb){
     let datasnapshot=firebaseConnection.database().ref('Table1/UserActive');
-    datasnapshot.on('value',(actives)=>{
+    datasnapshot.orderByChild("createAt").startAt(timeStart).endAt(timeEnd).on('value',(actives)=>{
         let arrData=[];
         let index=1;
         actives.forEach(element=>{

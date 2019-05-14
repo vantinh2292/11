@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -75,17 +76,19 @@ class EnhancedTable extends React.Component {
     order: 'asc',
     orderBy: 'calories',
     selected: [],
-    data:[],
+    data:this.props.data,
     page: 0,
     rowsPerPage: 5,
   };
-  componentWillMount(){
-    GetUserActive((result) => {
-      this.setState({
-          data: result,
-      })
-  });
-  }
+  // componentWillMount(){
+  //   var timeStart=this.props.timeStart;
+  //   var timeEnd=this.props.timeEnd;
+  //   GetUserActive((timeStart,timeEnd,result) => {
+  //     this.setState({
+  //         data: result,
+  //     })
+  // });
+  // }
   handleRequestSort = (event, property) => {
     const orderBy = property;
     let order = 'desc';
@@ -213,5 +216,10 @@ class EnhancedTable extends React.Component {
 EnhancedTable.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
-export default withStyles(styles)(EnhancedTable);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    timeStart: state.searchTime.tableReport.timeStart,
+    timeEnd:state.searchTime.tableReport.timeEnd
+  }
+}
+export default connect(mapStateToProps)(withStyles(styles)(EnhancedTable));

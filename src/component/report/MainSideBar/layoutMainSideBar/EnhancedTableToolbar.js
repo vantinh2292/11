@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-
+import {actionOpenSearch} from '../../../../redux/actions/searchTimeAction'
 const toolbarStyles = theme => ({
     root: {
         paddingRight: theme.spacing.unit,
@@ -51,25 +51,19 @@ class EnhancedTableToolbar extends Component {
                   </Typography>
                     ) : (
                             <Typography variant="h6" id="tableTitle">
-                                Nutrition
+                                REPORT DATA
                   </Typography>
                         )}
                 </div>
                 <div className={classes.spacer} />
                 <div className={classes.actions}>
-                    {numSelected > 0 ? (
-                        <Tooltip title="Delete">
-                            <IconButton aria-label="Delete">
-                                <DeleteIcon />
-                            </IconButton>
-                        </Tooltip>
-                    ) : (
-                            <Tooltip title="Filter list">
-                                <IconButton aria-label="Filter list">
-                                    <FilterListIcon />
-                                </IconButton>
-                            </Tooltip>
-                        )}
+
+                    <Tooltip title="OPEN SEARCH">
+                        <IconButton onClick={this.props.actionOpenSearch} aria-label="Search">
+                            <RefreshIcon />
+                        </IconButton>
+                    </Tooltip>
+
                 </div>
             </Toolbar>
         );
@@ -79,5 +73,11 @@ EnhancedTableToolbar.propTypes = {
     classes: PropTypes.object.isRequired,
     numSelected: PropTypes.number.isRequired,
 };
-
-export default withStyles(toolbarStyles)(EnhancedTableToolbar);
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        actionOpenSearch: () => {
+            dispatch(actionOpenSearch())
+        }
+    }
+}
+export default connect(null,mapDispatchToProps)(withStyles(toolbarStyles)(EnhancedTableToolbar));
