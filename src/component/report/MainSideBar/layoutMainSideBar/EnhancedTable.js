@@ -78,7 +78,7 @@ class EnhancedTable extends React.Component {
     selected: [],
     data:this.props.data,
     page: 0,
-    rowsPerPage: 5,
+    rowsPerPage: 10,
   };
   // componentWillMount(){
   //   var timeStart=this.props.timeStart;
@@ -194,7 +194,7 @@ class EnhancedTable extends React.Component {
           </Table>
         </div>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 10, 20,30,40,50]}
           component="div"
           count={data.length}
           rowsPerPage={rowsPerPage}

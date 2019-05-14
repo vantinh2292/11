@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import Print from '@material-ui/icons/Print';
+import ArrowBackSharp from '@material-ui/icons/ArrowBackSharp';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -57,10 +59,17 @@ class EnhancedTableToolbar extends Component {
                 </div>
                 <div className={classes.spacer} />
                 <div className={classes.actions}>
-
                     <Tooltip title="OPEN SEARCH">
                         <IconButton onClick={this.props.actionOpenSearch} aria-label="Search">
-                            <RefreshIcon />
+                            <ArrowBackSharp />
+                        </IconButton>
+                    </Tooltip>
+
+                </div>
+                <div className={classes.actions}>
+                    <Tooltip title="PRINT">
+                        <IconButton onClick={this.props.actionOpenSearch} aria-label="PRINT">
+                            <Print />
                         </IconButton>
                     </Tooltip>
 

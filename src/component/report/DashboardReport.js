@@ -27,7 +27,6 @@ class DashboardReport extends Component {
                                     this.props.index === item.index ? <item.layout key={key} width={item.with} height={item.height}></item.layout> : ''
                                 ))
                                 }
-                       
                     </Col>
                 </Row>
             </Container>
